@@ -14,6 +14,13 @@ public class EventController implements GenericController<Event> {
             "and hold_time between ? and ? " +
             "and fee between ? and ?"+
             "and address like ? " ;
+    private final String FIND_TAG_BY_EVENT_ID =
+            "select tag.* from tag " +
+            "join tag_event on tag.tag_id=tag_event.tag_id " +
+            "join event on tag_event.event_id=event.event_id " +
+            "where event.event_id=?";
+    private final String SHOW_ALL_EVENT_BY_ID="select * from event where event_id=?";
+    private final String FIND_PICTURE_BY_EVENT_ID="select * from picture where event_id=?";
     private final String SHOW_ALL_EVENT_PARTICIPATED_N_USER =
             "select *  " +
             "from event  " +
@@ -135,7 +142,38 @@ public class EventController implements GenericController<Event> {
 
     @Override
     public Event showByIndex(int index) {
-        return null;
+        try(Connection connection= connector.getConnection();
+        PreparedStatement preparedStatement=connection.prepareStatement(SHOW_ALL_EVENT_BY_ID)) {
+            preparedStatement.setInt(1,index);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            resultSet.next();
+            int id=resultSet.getInt("event_id");
+            LocalDateTime hold_time= resultSet.getTimestamp("hold_time").toLocalDateTime();
+            String eventName=resultSet.getString("event_name");
+            long fee=resultSet.getLong("fee");
+            String profPicture=resultSet.getString("prof_picture");
+            String description=resultSet.getString("description");
+            String address=resultSet.getString("address");
+            int b_userId=resultSet.getInt("b_user_id");
+            ArrayList<String>pictures=new ArrayList<>();
+            try(PreparedStatement findPicture=connection.prepareStatement(FIND_PICTURE_BY_EVENT_ID)){
+                ResultSet pictureResult=findPicture.executeQuery();
+                while (pictureResult.next()){
+                    pictures.add(pictureResult.getString("src"));
+                }
+            }
+            ArrayList<String>tags=new ArrayList<>();
+            try(PreparedStatement findTags=connection.prepareStatement(FIND_TAG_BY_EVENT_ID)){
+                findTags.setInt(1,index);
+                ResultSet tagResult=findTags.executeQuery();
+                while (tagResult.next()){
+                    tags.add(tagResult.getString("tag_name"));
+                }
+            }
+            return new Event(id,hold_time,eventName,fee,profPicture,pictures,tags,description,address,b_userId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
