@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "NormalUserServlet", value = "/NormalUserServlet")
 public class NormalUserServlet extends HttpServlet {
@@ -30,6 +31,8 @@ public class NormalUserServlet extends HttpServlet {
 
     private void showALlNormalUser(HttpServletRequest request, HttpServletResponse response) {
         try {
+            List<NormalUser> normalUsers = normalUserController.showAll();
+            request.setAttribute("normal", normalUsers);
             request.getRequestDispatcher("nUser/normal.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
@@ -50,7 +53,7 @@ public class NormalUserServlet extends HttpServlet {
 
     private void showCreateNewNormalUser(HttpServletRequest request, HttpServletResponse response) {
         try {
-            request.getRequestDispatcher(".jsp").forward(request, response);
+            request.getRequestDispatcher("login/signupN.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -78,7 +81,7 @@ public class NormalUserServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        NormalUser normalUser = new NormalUser(password,fullName,avatar,phone,normalUserId,age,gender,address,email);
+        NormalUser normalUser = new NormalUser(password, fullName, avatar, phone, normalUserId, age, gender, address, email);
         normalUserController.update(normalUser);
         try {
             response.sendRedirect("");
@@ -91,7 +94,7 @@ public class NormalUserServlet extends HttpServlet {
     private void createNewNormalUser(HttpServletRequest request, HttpServletResponse response) {
         String login_name = request.getParameter("login_name");
         String password = request.getParameter("password");
-        String fullName = request.getParameter("fullName");
+        String fullName = request.getParameter("name");
         String avatar = request.getParameter("avatar");
         String phone = request.getParameter("phone");
         int age = Integer.parseInt(request.getParameter("age"));
@@ -101,7 +104,7 @@ public class NormalUserServlet extends HttpServlet {
         NormalUser normalUser = new NormalUser(login_name, password, fullName, avatar, phone, age, gender, address, email);
         normalUserController.create(normalUser);
         try {
-            request.getRequestDispatcher("nUser/create.jsp").forward(request, response);
+            request.getRequestDispatcher("login/signupN.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
