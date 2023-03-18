@@ -1,6 +1,7 @@
 package com.example.goevent.view;
 
 import com.example.goevent.controller.EventController;
+import com.example.goevent.controller.NormalUserProcessor;
 import com.example.goevent.model.Event;
 
 import javax.servlet.*;
@@ -13,18 +14,19 @@ import java.util.ArrayList;
 @WebServlet(name = "NUserInsideServlet", value = "/nuserinside")
 public class NUserInsideServlet extends HttpServlet {
     EventController eventController=new EventController();
+    NormalUserProcessor userProcessor=new NormalUserProcessor();
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String action=request.getParameter("action");
         if(action==null)action="";
         switch (action){
-            case "showAllEvent":
+            case "show_all_event":
                 showAllEvent(request,response);
                 break;
-            case "showAllRegisteredEvent":
+            case "show_all_registered_event":
                 showAllRegisteredEvents(request,response);
                 break;
-            case "show1Event":
+            case "show1event":
                 show1Event(request,response);
                 break;
         }
@@ -32,7 +34,11 @@ public class NUserInsideServlet extends HttpServlet {
 
     private void show1Event(HttpServletRequest request, HttpServletResponse response) {
         int event_id= Integer.parseInt(request.getParameter("event_id"));
+        HttpSession session=request.getSession();
+        int nUser_id= (int) session.getAttribute("n_user_id");
         Event event=eventController.showByIndex(event_id);
+        boolean registerStatus=userProcessor.checkIfUserAlreadyRegistered(nUser_id,event_id);
+        request.setAttribute("registerStatus",registerStatus);
         request.setAttribute("event",event);
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/nUser/show1Event.jsp");
         try {
@@ -93,13 +99,24 @@ public class NUserInsideServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         String action=request.getParameter("action");
         if(action==null)action="";
         switch (action){
-            case "show1Event":
-                show1Event(request,response);
+            case "show1event":
+                registerNUser(request,response);
                 break;
+        }
+    }
+
+    private void registerNUser(HttpServletRequest request, HttpServletResponse response) {
+        boolean req= Boolean.parseBoolean(request.getParameter("req"));
+        int event_id = Integer.parseInt(request.getParameter("event_id"));
+        int n_user_id = (int) request.getSession().getAttribute("n_user_id");
+        if(req) {
+            userProcessor.registerNUserToEvent(n_user_id, event_id);
+        }else{
+            userProcessor.unRegisterNUserFromEvent(n_user_id,event_id);
         }
     }
 }
