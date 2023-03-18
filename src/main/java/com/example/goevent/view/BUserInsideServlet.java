@@ -1,6 +1,7 @@
 package com.example.goevent.view;
 
 import com.example.goevent.controller.EventController;
+import com.example.goevent.model.BusinessUser;
 import com.example.goevent.model.Event;
 
 import javax.servlet.*;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "EventServlet", value = "/events")
 public class BUserInsideServlet extends HttpServlet {
@@ -64,7 +66,9 @@ public class BUserInsideServlet extends HttpServlet {
     }
 
     private void listEvent(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("event/list.jsp");
+        List<Event> events = eventController.showAll();
+        request.setAttribute("events",events);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("event/event.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
