@@ -20,6 +20,7 @@ public class NormalUserController implements GenericController<NormalUser> {
     private static final String UPDATE_NORMAL_USER = "call update_normal_user(?,?,?,?,?,?,?,?,?);";
 
 
+
     @Override
     public ArrayList<NormalUser> showAll() {
         ArrayList<NormalUser> result = new ArrayList<>();

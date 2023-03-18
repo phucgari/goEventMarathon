@@ -18,6 +18,7 @@ public class NormalUser extends User{
         this.email = email;
     }
 
+
     public NormalUser(int userId, String userName, String password, String fullName, String avatar, String phone, int normalUserId, int age, String gender, String address, String email) {
         super(userId, userName, password, fullName, avatar, phone);
         this.normalUserId = normalUserId;
@@ -49,6 +50,14 @@ public class NormalUser extends User{
         this.gender = gender;
         this.address = address;
         this.email = email;
+    }
+
+    public NormalUser(int normalUserId) {
+        this.normalUserId = normalUserId;
+    }
+
+    public NormalUser(String userName, String password) {
+        super(userName, password);
     }
 
     public int getNormalUserId() {

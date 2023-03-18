@@ -2,6 +2,7 @@ package com.example.goevent.controller;
 
 import com.example.goevent.connector.Connector;
 import com.example.goevent.model.BusinessUser;
+import com.example.goevent.model.NormalUser;
 
 import java.sql.*;
 import java.util.ArrayList;
