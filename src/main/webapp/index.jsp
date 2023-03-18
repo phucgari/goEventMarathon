@@ -1,343 +1,82 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Nam
-  Date: 3/18/2023
-  Time: 4:21 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-        body {
-            color: #566787;
-            background: #f5f5f5;
-            font-family: 'Varela Round', sans-serif;
-            font-size: 13px;
-        }
-
-        .table-wrapper {
-            background: #fff;
-            padding: 20px 25px;
-            margin: 30px 0;
-            border-radius: 3px;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-        }
-
-        .table-title {
-            padding-bottom: 15px;
-            background: #435d7d;
-            color: #fff;
-            padding: 16px 30px;
-            margin: -20px -25px 10px;
-            border-radius: 3px 3px 0 0;
-        }
-
-        .table-title h2 {
-            margin: 5px 0 0;
-            font-size: 24px;
-        }
-
-        .table-title .btn-group {
-            float: right;
-        }
-
-        .table-title .btn {
-            color: #fff;
-            float: right;
-            font-size: 13px;
-            border: none;
-            min-width: 50px;
-            border-radius: 2px;
-            border: none;
-            outline: none !important;
-            margin-left: 10px;
-        }
-
-        .table-title .btn i {
-            float: left;
-            font-size: 21px;
-            margin-right: 5px;
-        }
-
-        .table-title .btn span {
-            float: left;
-            margin-top: 2px;
-        }
-
-        table.table tr th, table.table tr td {
-            border-color: #e9e9e9;
-            padding: 12px 15px;
-            vertical-align: middle;
-        }
-
-        table.table tr th:first-child {
-            width: 60px;
-        }
-
-        table.table tr th:last-child {
-            width: 100px;
-        }
-
-        table.table-striped tbody tr:nth-of-type(odd) {
-            background-color: #fcfcfc;
-        }
-
-        table.table-striped.table-hover tbody tr:hover {
-            background: #f5f5f5;
-        }
-
-        table.table th i {
-            font-size: 13px;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-
-        table.table td:last-child i {
-            opacity: 0.9;
-            font-size: 22px;
-            margin: 0 5px;
-        }
-
-        table.table td a {
-            font-weight: bold;
-            color: #566787;
-            display: inline-block;
-            text-decoration: none;
-            outline: none !important;
-        }
-
-        table.table td a:hover {
-            color: #2196F3;
-        }
-
-        table.table td a.edit {
-            color: #FFC107;
-        }
-
-        table.table td a.delete {
-            color: #F44336;
-        }
-
-        table.table td i {
-            font-size: 19px;
-        }
-
-        table.table .avatar {
-            border-radius: 50%;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-
-        .pagination {
-            float: right;
-            margin: 0 0 5px;
-        }
-
-        .pagination li a {
-            border: none;
-            font-size: 13px;
-            min-width: 30px;
-            min-height: 30px;
-            color: #999;
-            margin: 0 2px;
-            line-height: 30px;
-            border-radius: 2px !important;
-            text-align: center;
-            padding: 0 6px;
-        }
-
-        .pagination li a:hover {
-            color: #666;
-        }
-
-        .pagination li.active a, .pagination li.active a.page-link {
-            background: #03A9F4;
-        }
-
-        .pagination li.active a:hover {
-            background: #0397d6;
-        }
-
-        .pagination li.disabled i {
-            color: #ccc;
-        }
-
-        .pagination li i {
-            font-size: 16px;
-            padding-top: 6px
-        }
-
-        .hint-text {
-            float: left;
-            margin-top: 10px;
-            font-size: 13px;
-        }
-
-        /* Custom checkbox */
-        .custom-checkbox {
-            position: relative;
-        }
-
-        .custom-checkbox input[type="checkbox"] {
-            opacity: 0;
-            position: absolute;
-            margin: 5px 0 0 3px;
-            z-index: 9;
-        }
-
-        .custom-checkbox label:before {
-            width: 18px;
-            height: 18px;
-        }
-
-        .custom-checkbox label:before {
-            content: '';
-            margin-right: 10px;
-            display: inline-block;
-            vertical-align: text-top;
-            background: white;
-            border: 1px solid #bbb;
-            border-radius: 2px;
-            box-sizing: border-box;
-            z-index: 2;
-        }
-
-        .custom-checkbox input[type="checkbox"]:checked + label:after {
-            content: '';
-            position: absolute;
-            left: 6px;
-            top: 3px;
-            width: 6px;
-            height: 11px;
-            border: solid #000;
-            border-width: 0 3px 3px 0;
-            transform: inherit;
-            z-index: 3;
-            transform: rotateZ(45deg);
-        }
-
-        .custom-checkbox input[type="checkbox"]:checked + label:before {
-            border-color: #03A9F4;
-            background: #03A9F4;
-        }
-
-        .custom-checkbox input[type="checkbox"]:checked + label:after {
-            border-color: #fff;
-        }
-
-        .custom-checkbox input[type="checkbox"]:disabled + label:before {
-            color: #b8b8b8;
-            cursor: auto;
-            box-shadow: none;
-            background: #ddd;
-        }
-
-        /* Modal styles */
-        .modal .modal-dialog {
-            max-width: 400px;
-        }
-
-        .modal .modal-header, .modal .modal-body, .modal .modal-footer {
-            padding: 20px 30px;
-        }
-
-        .modal .modal-content {
-            border-radius: 3px;
-        }
-
-        .modal .modal-footer {
-            background: #ecf0f1;
-            border-radius: 0 0 3px 3px;
-        }
-
-        .modal .modal-title {
-            display: inline-block;
-        }
-
-        .modal .form-control {
-            border-radius: 2px;
-            box-shadow: none;
-            border-color: #dddddd;
-        }
-
-        .modal textarea.form-control {
-            resize: vertical;
-        }
-
-        .modal .btn {
-            border-radius: 2px;
-            min-width: 100px;
-        }
-
-        .modal form label {
-            font-weight: normal;
-        }
-    </style>
+    <title>JSP - Hello World</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <div class="table-wrapper">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h2>Event <b>Management</b></h2>
+<!-- Section: Design Block -->
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="my-5 display-3 fw-bold ls-tight">
+                        Log in to join <br/>
+                        <span class="text-primary">the event</span>
+                    </h1>
+                    <p style="color: hsl(217, 10%, 50.8%)">
+                        Organizing events (events): to introduce new products or services is an indispensable activity
+                        for businesses. This is a very important job for companies because the event brings them to
+                        the public and confirms who they are.
+                    </p>
                 </div>
-                <div class="col-sm-6">
-                    <a href="bUser/create.jsp" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i>
-                        <span>Add New Event</span></a>
+
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card">
+                        <div class="card-body py-5 px-md-5">
+                            <form>
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" name="username" id="username" class="form-control"/>
+                                            <label class="form-label">Username</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="password" name="password" id="password" class="form-control"/>
+                                            <label class="form-label">Password</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">
+                                    Sign in
+                                </button>
+                                &nbsp&nbsp&nbsp
+                                <button class="btn btn-primary btn-block mb-4"><a
+                                        style="color: white; text-decoration: none" href="login/signupN.jsp">Sign
+                                    up normal</a>
+                                </button>
+                                &nbsp&nbsp&nbsp
+                                <button class="btn btn-primary btn-block mb-4"><a
+                                        style="color: white; text-decoration: none" href="login/signupB.jsp">Sign
+                                    up business</a>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Thomas Hardy</td>
-                <td>thomashardy@mail.com</td>
-                <td>89 Chiaroscuro Rd, Portland, USA</td>
-                <td>(171) 555-2222</td>
-                <td>
-                    <a href="bUser/edit.jsp" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="bUser/view.jsp" class="edit" data-toggle="modal"><i title="view" data-toggle="tooltip"
-                                                                                 class="material-icons">assignment</i></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="clearfix">
-            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-            <ul class="pagination">
-                <li class="page-item disabled"><a href="#">Previous</a></li>
-                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">Next</a></li>
-            </ul>
-        </div>
     </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
 </body>
 </html>
