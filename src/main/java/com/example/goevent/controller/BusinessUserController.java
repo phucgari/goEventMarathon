@@ -13,7 +13,7 @@ public class BusinessUserController implements GenericController<BusinessUser> {
 
     public static final String SELECT_ALL_BUSINESS_USERS = "select B.b_user_id, u.user_id, u.login_name, u.password, u.name, u.avatar, u.phone\n" +
             "from b_user B join user u on u.user_id = B.user_id;";
-    public static final String CALL_CREATE_BUSINESS_USER = "call create_b_user(?,?,?,?,?);";
+    public static final String CALL_CREATE_BUSINESS_USER = "call create_b_user(?,?,?,?,?,?);";
     public static final String CALL_EDIT_BUSINESS_USER = "call edit_b_user(?,?,?,?,?,?);";
 
     @Override
@@ -33,6 +33,7 @@ public class BusinessUserController implements GenericController<BusinessUser> {
             callableStatement.setString(3, user.getFullName());
             callableStatement.setString(4, user.getAvatar());
             callableStatement.setString(5, user.getPhone());
+            callableStatement.setString(6, user.getGender());
             callableStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
