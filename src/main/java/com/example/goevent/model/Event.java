@@ -1,79 +1,53 @@
 package com.example.goevent.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-public class Event extends BusinessUser{
+public class Event {
     private int eventId;
     private LocalDateTime holdTime;
     private String eventName;
-    private long free;
+    private long fee;
     private String profilePic;
+    private ArrayList<String> pictures;
+    private ArrayList<String> tag;
     private String description;
     private String address;
+    private int b_userID;
 
     public Event() {
     }
 
-    public Event(int eventId, LocalDateTime holdTime, String eventName, long free, String profilePic, String description, String address) {
-        this.eventId = eventId;
-        this.holdTime = holdTime;
-        this.eventName = eventName;
-        this.free = free;
-        this.profilePic = profilePic;
-        this.description = description;
-        this.address = address;
-    }
-    public Event(LocalDateTime holdTime, String eventName, long free, String profilePic, String description, String address) {
-        this.holdTime = holdTime;
-        this.eventName = eventName;
-        this.free = free;
-        this.profilePic = profilePic;
-        this.description = description;
-        this.address = address;
+    public long getFee() {
+        return fee;
     }
 
-    public Event(int businessUserId, int eventId, LocalDateTime holdTime, String eventName, long free, String profilePic, String description, String address) {
-        super(businessUserId);
-        this.eventId = eventId;
-        this.holdTime = holdTime;
-        this.eventName = eventName;
-        this.free = free;
-        this.profilePic = profilePic;
-        this.description = description;
-        this.address = address;
+    public void setFee(long fee) {
+        this.fee = fee;
     }
 
-    public Event(int userId, String userName, String password, String fullName, String avatar, String phone, int businessUserId, int eventId, LocalDateTime holdTime, String eventName, long free, String profilePic, String description, String address) {
-        super(userId, userName, password, fullName, avatar, phone, businessUserId);
-        this.eventId = eventId;
-        this.holdTime = holdTime;
-        this.eventName = eventName;
-        this.free = free;
-        this.profilePic = profilePic;
-        this.description = description;
-        this.address = address;
+    public ArrayList<String> getPictures() {
+        return pictures;
     }
 
-    public Event(String userName, String password, String fullName, String avatar, String phone, int businessUserId, int eventId, LocalDateTime holdTime, String eventName, long free, String profilePic, String description, String address) {
-        super(userName, password, fullName, avatar, phone, businessUserId);
-        this.eventId = eventId;
-        this.holdTime = holdTime;
-        this.eventName = eventName;
-        this.free = free;
-        this.profilePic = profilePic;
-        this.description = description;
-        this.address = address;
+    public void setPictures(ArrayList<String> pictures) {
+        this.pictures = pictures;
     }
 
-    public Event(String userName, String password, int businessUserId, int eventId, LocalDateTime holdTime, String eventName, long free, String profilePic, String description, String address) {
-        super(userName, password, businessUserId);
-        this.eventId = eventId;
-        this.holdTime = holdTime;
-        this.eventName = eventName;
-        this.free = free;
-        this.profilePic = profilePic;
-        this.description = description;
-        this.address = address;
+    public ArrayList<String> getTag() {
+        return tag;
+    }
+
+    public void setTag(ArrayList<String> tag) {
+        this.tag = tag;
+    }
+
+    public int getB_userID() {
+        return b_userID;
+    }
+
+    public void setB_userID(int b_userID) {
+        this.b_userID = b_userID;
     }
 
     public int getEventId() {
@@ -101,11 +75,11 @@ public class Event extends BusinessUser{
     }
 
     public long getFree() {
-        return free;
+        return fee;
     }
 
     public void setFree(long free) {
-        this.free = free;
+        this.fee = free;
     }
 
     public String getProfilePic() {
