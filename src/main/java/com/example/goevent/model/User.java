@@ -1,6 +1,6 @@
 package com.example.goevent.model;
 
-public class User {
+public abstract class User {
     private int userId;
     private String userName;
     private String password;
