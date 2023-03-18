@@ -10,6 +10,22 @@ public class NormalUser extends User{
     public NormalUser() {
     }
 
+    public NormalUser(int normalUserId, int age, String gender, String address, String email) {
+        this.normalUserId = normalUserId;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+        this.email = email;
+    }
+
+    public NormalUser(int userId, String userName, String password, String fullName, String avatar, String phone, int normalUserId, int age, String gender, String address, String email) {
+        super(userId, userName, password, fullName, avatar, phone);
+        this.normalUserId = normalUserId;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+        this.email = email;
+    }
 
     public int getNormalUserId() {
         return normalUserId;
