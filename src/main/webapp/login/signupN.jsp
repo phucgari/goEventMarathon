@@ -15,8 +15,8 @@
             <div class="row gx-lg-5 align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <h1 class="my-5 display-3 fw-bold ls-tight">
-                        Log in to join <br/>
-                        <span class="text-primary">the event</span>
+                        You are registering for a <br/>
+                        <span class="text-primary"> normal account</span>
                     </h1>
                     <p style="color: hsl(217, 10%, 50.8%)">
                         Organizing events (events): to introduce new products or services is an indispensable activity
@@ -28,12 +28,54 @@
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <div class="card">
                         <div class="card-body py-5 px-md-5">
-                            <form>
+                            <form action="/NormalUserServlet?action=create" method="post">
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" name="username" id="username" class="form-control"/>
+                                            <input type="text" name="name" id="name" class="form-control"/>
+                                            <label class="form-label">Full name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="number" name="phone" id="phone" class="form-control"/>
+                                            <label class="form-label">Phone</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="number" name="age" id="age" class="form-control"/>
+                                            <label class="form-label">Age</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <select name="gender" id="gender" class="form-select"
+                                                aria-label="Default select example">
+                                            <option value="1">Male</option>
+                                            <option value="2">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="address" id="address" class="form-control"/>
+                                    <label class="form-label">Address</label>
+                                </div>
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" name="email" id="email" class="form-control"/>
+                                    <label class="form-label">Email</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="avatar" id="avatar" class="form-control"/>
+                                    <label class="form-label">Avatar</label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" name="login_name" id="login_name" class="form-control"/>
                                             <label class="form-label">Username</label>
                                         </div>
                                     </div>
@@ -46,17 +88,12 @@
                                 </div>
                                 <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary btn-block mb-4">
-                                    Sign in
+                                    Sign up normal
                                 </button>
                                 &nbsp&nbsp&nbsp
                                 <button class="btn btn-primary btn-block mb-4"><a
-                                        style="color: white; text-decoration: none" href="login/signupN.jsp">Sign
-                                    up normal</a>
-                                </button>
-                                &nbsp&nbsp&nbsp
-                                <button class="btn btn-primary btn-block mb-4"><a
-                                        style="color: white; text-decoration: none" href="login/signupB.jsp">Sign
-                                    up business</a>
+                                        style="color: white; text-decoration: none" href="http://localhost:8080/">Sign
+                                    in</a>
                                 </button>
                             </form>
                         </div>

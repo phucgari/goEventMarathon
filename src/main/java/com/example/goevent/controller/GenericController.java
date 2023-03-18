@@ -5,9 +5,10 @@ import com.example.goevent.connector.Connector;
 import java.util.Collection;
 
 public interface GenericController<E> {
-    String jdbcURL = "jdbc:mysql://localhost:3306/finance_webapp";
+    String jdbcURL = "jdbc:mysql://localhost:3306/go_event";
+
     String jdbcUsername = "root";
-    String jdbcPassword = "123456";
+    String jdbcPassword = "Nguyenluc97";
 
     Connector connector = new Connector(jdbcURL, jdbcUsername, jdbcPassword);
 
