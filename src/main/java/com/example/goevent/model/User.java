@@ -34,6 +34,10 @@ public abstract class User {
         this.avatar = avatar;
         this.phone = phone;
     }
+    public User(String fullName, String phone) {
+        this.fullName = fullName;
+        this.phone = phone;
+    }
 
     public int getUserId() {
         return userId;
