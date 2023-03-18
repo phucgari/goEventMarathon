@@ -107,14 +107,6 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public long getFree() {
-        return fee;
-    }
-
-    public void setFree(long free) {
-        this.fee = free;
-    }
-
     public String getProfilePic() {
         return profilePic;
     }
