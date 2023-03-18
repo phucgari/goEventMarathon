@@ -39,7 +39,7 @@ public class NormalUserServlet extends HttpServlet {
         try {
             List<NormalUser> normalUsers = normalUserController.showAll();
             request.setAttribute("normal", normalUsers);
-            request.getRequestDispatcher("nUser/normal.jsp").forward(request, response);
+            request.getRequestDispatcher("nUser/event.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
