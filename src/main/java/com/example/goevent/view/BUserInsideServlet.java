@@ -64,8 +64,12 @@ public class BUserInsideServlet extends HttpServlet {
     }
 
     private void listEvent(HttpServletRequest request, HttpServletResponse response) {
-
-
+        RequestDispatcher dispatcher = request.getRequestDispatcher("event/list.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //===============================Method Post=================================
@@ -97,7 +101,10 @@ public class BUserInsideServlet extends HttpServlet {
         String prof_picture = request.getParameter("prof_picture");
         String description = request.getParameter("description");
         String address = request.getParameter("address");
-        int b_user_id = Integer.parseInt(request.getParameter("b_user_id"));
+
+        HttpSession session = request.getSession();
+
+        int b_user_id = (int) session.getAttribute("b_user_id");
 
         String[] tagsArr = request.getParameterValues("tag_name");
         ArrayList<String> tags = new ArrayList<>();
