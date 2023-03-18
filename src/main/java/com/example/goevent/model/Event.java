@@ -50,6 +50,16 @@ public class Event {
         this.numberParticipant=numberParticipant;
     }
 
+    public Event(LocalDateTime holdTime, String eventName, long fee, String profilePic, String description, String address, int b_userID) {
+        this.holdTime = holdTime;
+        this.eventName = eventName;
+        this.fee = fee;
+        this.profilePic = profilePic;
+        this.description = description;
+        this.address = address;
+        this.b_userID = b_userID;
+    }
+
     public long getFee() {
         return fee;
     }
