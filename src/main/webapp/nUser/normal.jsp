@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -290,7 +291,7 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h2>Event <b>Management</b></h2>
+                    <h2>Normal <b>Management</b></h2>
                 </div>
                 <div class="col-sm-6">
                     <a href="bUser/create.jsp" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i>
@@ -301,26 +302,30 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone</th>
+                <th>id</th>
+                <th>age</th>
+                <th>gender</th>
+                <th>address</th>
+                <th>email</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Thomas Hardy</td>
-                <td>thomashardy@mail.com</td>
-                <td>89 Chiaroscuro Rd, Portland, USA</td>
-                <td>(171) 555-2222</td>
-                <td>
-                    <a href="bUser/edit.jsp" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="bUser/view.jsp" class="edit" data-toggle="modal"><i title="view" data-toggle="tooltip"
-                                                                                 class="material-icons">assignment</i></a>
-                </td>
-            </tr>
+            <c:forEach var="n" items="${requestScope.normal}">
+                <tr>
+                    <td><c:out value="${n.normalUserId}"/></td>
+                    <td><c:out value="${n.age}"/></td>
+                    <td><c:out value="${n.gender}"/></td>
+                    <td><c:out value="${n.address}"/></td>
+                    <td><c:out value="${n.email}"/></td>
+                    <td>
+                        <a href="bUser/edit.jsp" class="edit" data-toggle="modal"><i class="material-icons"
+                                                                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                        <a href="bUser/view.jsp" class="edit" data-toggle="modal"><i title="view" data-toggle="tooltip"
+                                                                                     class="material-icons">assignment</i></a>
+                    </td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
         <div class="clearfix">

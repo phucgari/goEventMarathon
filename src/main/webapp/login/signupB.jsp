@@ -28,7 +28,7 @@
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <div class="card">
                         <div class="card-body py-5 px-md-5">
-                            <form>
+                            <form action="/BusinessUserServlet?action=create" method="post">
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
@@ -39,8 +39,8 @@
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="number" name="age" id="age" class="form-control"/>
-                                            <label class="form-label">Age</label>
+                                            <input type="number" name="phone" id="phone" class="form-control"/>
+                                            <label class="form-label">Phone</label>
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" name="username" id="username" class="form-control"/>
+                                            <input type="text" name="login_name" id="login_name" class="form-control"/>
                                             <label class="form-label">Username</label>
                                         </div>
                                     </div>
