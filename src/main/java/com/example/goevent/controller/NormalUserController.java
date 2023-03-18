@@ -99,7 +99,6 @@ public class NormalUserController implements GenericController<NormalUser> {
             throw new RuntimeException(e);
         }
     }
-
     @Override
     public void delete(int index) {
 
