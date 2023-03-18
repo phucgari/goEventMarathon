@@ -24,9 +24,15 @@ public class NormalUserServlet extends HttpServlet {
             case "edit":
                 showEditNormalUser(request, response);
                 break;
+            case "login":
+                showFormLoginNormal(request, response);
+                break;
             default:
                 showALlNormalUser(request, response);
         }
+    }
+
+    private void showFormLoginNormal(HttpServletRequest request, HttpServletResponse response) {
     }
 
     private void showALlNormalUser(HttpServletRequest request, HttpServletResponse response) {

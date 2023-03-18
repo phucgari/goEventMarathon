@@ -20,6 +20,18 @@ public class Event {
     public Event() {
     }
 
+    public Event(LocalDateTime holdTime, String eventName, long fee, String profilePic, ArrayList<String> pictures, ArrayList<String> tag, String description, String address, int b_userID) {
+        this.holdTime = holdTime;
+        this.eventName = eventName;
+        this.fee = fee;
+        this.profilePic = profilePic;
+        this.pictures = pictures;
+        this.tag = tag;
+        this.description = description;
+        this.address = address;
+        this.b_userID = b_userID;
+    }
+
     public Event(int eventId, LocalDateTime holdTime, String eventName, long fee, String profilePic, ArrayList<String> pictures, ArrayList<String> tag, String description, String address, int b_userID, int numberRegister, int numberParticipant) {
         this.eventId = eventId;
         this.holdTime = holdTime;

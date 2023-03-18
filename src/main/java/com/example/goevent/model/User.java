@@ -11,10 +11,6 @@ public abstract class User {
     public User() {
     }
 
-    public User(String fullName, String phone) {
-        this.fullName = fullName;
-        this.phone = phone;
-    }
 
     public User(int userId, String userName, String password, String fullName, String avatar, String phone) {
         this.userId = userId;
@@ -39,10 +35,10 @@ public abstract class User {
         this.avatar = avatar;
         this.phone = phone;
     }
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
 
-    public User(String fullName, String phone) {
-        this.fullName = fullName;
-        this.phone = phone;
     }
 
     public int getUserId() {
