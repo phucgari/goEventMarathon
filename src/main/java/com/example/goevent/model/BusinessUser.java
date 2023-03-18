@@ -8,6 +8,10 @@ public class BusinessUser extends User{
     public BusinessUser() {
     }
 
+    public BusinessUser(String userName, String password) {
+        super(userName, password);
+    }
+
     public BusinessUser(int businessUserId, String gender) {
         this.businessUserId = businessUserId;
         this.gender = gender;
@@ -32,6 +36,10 @@ public class BusinessUser extends User{
         super( password, fullName, avatar, phone);
 
         this.gender = gender;
+    }
+
+    public BusinessUser(int businessUserId) {
+        this.businessUserId = businessUserId;
     }
 
     public int getBusinessUserId() {
