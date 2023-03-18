@@ -14,12 +14,45 @@ public class Event {
     private String description;
     private String address;
     private int b_userID;
+    private int numberRegister;
+    private int numberParticipant;
 
     public Event() {
     }
 
+    public Event(int eventId, LocalDateTime holdTime, String eventName, String address) {
+        this.eventId = eventId;
+        this.holdTime = holdTime;
+        this.eventName = eventName;
+        this.address = address;
+    }
+
+    public Event(int eventId, String eventName, String address, int numberRegister, int numberParticipant) {
+        this.eventId=eventId;
+        this.eventName=eventName;
+        this.address=address;
+        this.numberRegister=numberRegister;
+        this.numberParticipant=numberParticipant;
+    }
+
     public long getFee() {
         return fee;
+    }
+
+    public int getNumberRegister() {
+        return numberRegister;
+    }
+
+    public void setNumberRegister(int numberRegister) {
+        this.numberRegister = numberRegister;
+    }
+
+    public int getNumberParticipant() {
+        return numberParticipant;
+    }
+
+    public void setNumberParticipant(int numberParticipant) {
+        this.numberParticipant = numberParticipant;
     }
 
     public void setFee(long fee) {
