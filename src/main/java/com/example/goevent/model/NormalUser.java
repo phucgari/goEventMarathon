@@ -6,8 +6,18 @@ public class NormalUser extends User{
     private String gender;
     private String address;
     private String email;
+    private boolean checkIn;
 
     public NormalUser() {
+    }
+
+    public NormalUser(String fullName, String phone, int normalUserId, int age, String gender, String address, String email) {
+        super(fullName, phone);
+        this.normalUserId = normalUserId;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+        this.email = email;
     }
 
     public NormalUser(int normalUserId, int age, String gender, String address, String email) {

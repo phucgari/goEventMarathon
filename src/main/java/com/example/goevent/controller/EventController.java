@@ -1,6 +1,7 @@
 package com.example.goevent.controller;
 
 import com.example.goevent.model.Event;
+import com.example.goevent.model.NormalUser;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -66,6 +67,12 @@ public class EventController implements GenericController<Event> {
             "insert into picture(event_id,src) " +
                     "values (?,?)"
             ;
+    private final String SHOW_ALL_N_USER_IN_EVENT="select user.* , n_user.* " +
+            "from event " +
+            "inner join event_n_user on event.event_id=event_n_user.event_id " +
+            "inner join n_user on event_n_user.n_user_id=n_user.n_user_id " +
+            "inner join user on n_user.user_id=user.user_id " +
+            "where event.event_id = ?";
 
     @Override
     public ArrayList<Event> showAll() {
@@ -248,6 +255,27 @@ public class EventController implements GenericController<Event> {
                     addTagEvent.execute();
                 }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public ArrayList<NormalUser> showAllUserInEvent(int event_id){
+        try(Connection connection= connector.getConnection();
+        PreparedStatement preparedStatement=connection.prepareStatement(SHOW_ALL_N_USER_IN_EVENT)){
+            preparedStatement.setInt(1,event_id);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            ArrayList<NormalUser>result=new ArrayList<>();
+            while (resultSet.next()){
+                int normalUserId=resultSet.getInt("n_user_id");
+                String address=resultSet.getString("address");
+                String phone=resultSet.getString("phone");
+                String fullName=resultSet.getString("name");
+                int age=resultSet.getInt("age");
+                String gender=resultSet.getString("gender");
+                String email=resultSet.getString("email");
+                result.add(new NormalUser(fullName,phone,normalUserId,age,gender,address,email));
+            }
+            return result;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
