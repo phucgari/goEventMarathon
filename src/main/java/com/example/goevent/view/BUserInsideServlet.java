@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @WebServlet(name = "EventServlet", value = "/events")
 public class BUserInsideServlet extends HttpServlet {
@@ -97,11 +98,22 @@ public class BUserInsideServlet extends HttpServlet {
         String description = request.getParameter("description");
         String address = request.getParameter("address");
         int b_user_id = Integer.parseInt(request.getParameter("b_user_id"));
-        Event event = new Event(hold_time,event_name,fee,prof_picture,description,address,b_user_id);
-        eventController.create(event);
+
+        String[] tagsArr = request.getParameterValues("tag_name");
+        ArrayList<String> tags = new ArrayList<>();
+        for (String tag : tagsArr) {
+            tags.add(tag);
+        }
+
+        String[] picArr = request.getParameterValues("src");
+        ArrayList<String> pics = new ArrayList<>();
+        for (String pic : picArr) {
+            pics.add(pic);
+        }
+        eventController.create(new Event(hold_time, event_name, fee, prof_picture, pics, tags, description, address, b_user_id));
         RequestDispatcher dispatcher = request.getRequestDispatcher("event/create");
         try {
-            dispatcher.forward(request,response);
+            dispatcher.forward(request, response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
