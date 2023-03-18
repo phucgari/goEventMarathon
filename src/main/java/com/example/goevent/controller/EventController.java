@@ -7,9 +7,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class EventController implements GenericController<Event> {
+    private final String ADD_TAG_EVENT = "insert into tag_event(event_id,tag_id) " +
+            "values ((select max(event_id) from event),(select tag_id from tag where tag_name=?))";
+    private final String ADD_TAG_EVENT_BY_ID = "insert into tag_event(event_id,tag_id) " +
+            "values (?,(select tag_id from tag where tag_name=?))";
+    private final String DELETE_TAGS = "delete from tag_event where event_id=? ;" ;
+    private final String DELETE_PICTURES = "delete from picture where event_id=?";
+    private final String DELETE_AN_EVENT = "update envent set disable=true where event_id=?";
     private final String ADD_PICTURE = "insert into picture(event_id,src) " +
             "values ((select max(event_id) from event),?)";
-    private final String SHOW_ALL_EVENT_FILTER_N_USER ="select * from event " +
+    private final String SHOW_ALL_EVENT_FILTER_N_USER =
+            "select * from event " +
             "where disable=false " +
             "and hold_time between ? and ? " +
             "and fee between ? and ?"+
@@ -20,7 +28,11 @@ public class EventController implements GenericController<Event> {
             "join event on tag_event.event_id=event.event_id " +
             "where event.event_id=?";
     private final String SHOW_ALL_EVENT_BY_ID="select * from event where event_id=?";
-    private final String FIND_PICTURE_BY_EVENT_ID="select * from picture where event_id=?";
+    private final String FIND_PICTURE_BY_EVENT_ID=
+            "select count(*) as number_register,SUM(event_n_user.checkin=true) AS number_participant ,event.* " +
+            "from event " +
+            "left join event_n_user on event.event_id=event_n_user.event_id " +
+            "where event_id=?";
     private final String SHOW_ALL_EVENT_PARTICIPATED_N_USER =
             "select *  " +
             "from event  " +
@@ -41,6 +53,20 @@ public class EventController implements GenericController<Event> {
             "left join event_n_user on event.event_id=event_n_user.event_id " +
             "group by event.event_id " +
             "where b_user_id= ?";
+    private final String UPDATE_EVENT=
+            "update event " +
+            "set hold_time=?, " +
+                    "event_name=?, " +
+                    "fee=?, " +
+                    "prof_picture=?, " +
+                    "description=?, " +
+                    "address=? "
+                    ;
+    private final String ADD_PICTURE_BY_ID=
+            "insert into picture(event_id,src) " +
+                    "values (?,?)"
+            ;
+
     @Override
     public ArrayList<Event> showAll() {
         return null;
@@ -110,23 +136,24 @@ public class EventController implements GenericController<Event> {
 
     @Override
     public void create(Event object) {
-        try(Connection connection= connector.getConnection();
-        PreparedStatement preparedStatement=connection.prepareStatement(ADD_NEW_EVENT);
-        ){
-            preparedStatement.setTimestamp(1,Timestamp.valueOf(object.getHoldTime()));
-            preparedStatement.setString(2,object.getEventName());
-            preparedStatement.setLong(3,object.getFee());
-            preparedStatement.setString(4,object.getProfilePic());
-            preparedStatement.setString(5,object.getDescription());
-            preparedStatement.setString(6,object.getAddress());
-            preparedStatement.setInt(7,object.getB_userID());
-            preparedStatement.execute();
+        try(Connection connection= connector.getConnection()) {
+            try(PreparedStatement preparedStatement=connection.prepareStatement(ADD_NEW_EVENT);) {
+                preparedStatement.setTimestamp(1,Timestamp.valueOf(object.getHoldTime()));
+                preparedStatement.setString(2,object.getEventName());
+                preparedStatement.setLong(3,object.getFee());
+                preparedStatement.setString(4,object.getProfilePic());
+                preparedStatement.setString(5,object.getDescription());
+                preparedStatement.setString(6,object.getAddress());
+                preparedStatement.setInt(7,object.getB_userID());
+                preparedStatement.execute();
+            }
             for (String tag :
                     object.getTag()) {
-                try(PreparedStatement addTag=connection.prepareStatement(ADD_TAG)){
-                    addTag.setString(1,tag);
-                    addTag.execute();
-                }catch (SQLException ignored){}
+                addNewTag(connection, tag);
+                try(PreparedStatement addTagEvent=connection.prepareStatement(ADD_TAG_EVENT)){
+                    addTagEvent.setString(1,tag);
+                    addTagEvent.execute();
+                }
             }
             for (String picture :
                     object.getPictures()) {
@@ -138,6 +165,13 @@ public class EventController implements GenericController<Event> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void addNewTag(Connection connection, String tag) {
+        try(PreparedStatement addTag= connection.prepareStatement(ADD_TAG)){
+            addTag.setString(1, tag);
+            addTag.execute();
+        }catch (SQLException ignored){}
     }
 
     @Override
@@ -155,6 +189,8 @@ public class EventController implements GenericController<Event> {
             String description=resultSet.getString("description");
             String address=resultSet.getString("address");
             int b_userId=resultSet.getInt("b_user_id");
+            int numberRegister=resultSet.getInt("number_register");
+            int numberParticipant=resultSet.getInt("number_participant");
             ArrayList<String>pictures=new ArrayList<>();
             try(PreparedStatement findPicture=connection.prepareStatement(FIND_PICTURE_BY_EVENT_ID)){
                 ResultSet pictureResult=findPicture.executeQuery();
@@ -170,7 +206,7 @@ public class EventController implements GenericController<Event> {
                     tags.add(tagResult.getString("tag_name"));
                 }
             }
-            return new Event(id,hold_time,eventName,fee,profPicture,pictures,tags,description,address,b_userId);
+            return new Event(id,hold_time,eventName,fee,profPicture,pictures,tags,description,address,b_userId,numberRegister,numberParticipant);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -178,11 +214,53 @@ public class EventController implements GenericController<Event> {
 
     @Override
     public void update(Event object) {
-
+        try(Connection connection= connector.getConnection()){
+            try(PreparedStatement preparedStatement=connection.prepareStatement(UPDATE_EVENT)){
+                preparedStatement.setTimestamp(1,Timestamp.valueOf(object.getHoldTime()));
+                preparedStatement.setString(2,object.getEventName());
+                preparedStatement.setLong(3,object.getFee());
+                preparedStatement.setString(4,object.getProfilePic());
+                preparedStatement.setString(5, object.getDescription());
+                preparedStatement.setString(6,object.getAddress());
+                preparedStatement.execute();
+            }
+            try(PreparedStatement preparedStatement=connection.prepareStatement(DELETE_PICTURES)){
+                preparedStatement.setInt(1,object.getEventId());
+            }
+            for (String picture :
+                    object.getPictures()) {
+                try(PreparedStatement preparedStatement=connection.prepareStatement(ADD_PICTURE_BY_ID)){
+                    preparedStatement.setInt(1,object.getEventId());
+                    preparedStatement.setString(2,picture);
+                    preparedStatement.execute();
+                }
+            }
+            try(PreparedStatement preparedStatement=connection.prepareStatement(DELETE_TAGS)){
+                preparedStatement.setInt(1,object.getEventId());
+                preparedStatement.execute();
+            }
+            for (String tag :
+                    object.getTag()) {
+                addNewTag(connection,tag);
+                try(PreparedStatement addTagEvent=connection.prepareStatement(ADD_TAG_EVENT_BY_ID)){
+                    addTagEvent.setInt(1,object.getEventId());
+                    addTagEvent.setString(2,tag);
+                    addTagEvent.execute();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void delete(int index) {
-
+        try(Connection connection= connector.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(DELETE_AN_EVENT)){
+            preparedStatement.setInt(1,index);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

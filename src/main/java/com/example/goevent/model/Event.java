@@ -20,7 +20,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(int eventId, LocalDateTime holdTime, String eventName, long fee, String profilePic, ArrayList<String> pictures, ArrayList<String> tag, String description, String address, int b_userID) {
+    public Event(int eventId, LocalDateTime holdTime, String eventName, long fee, String profilePic, ArrayList<String> pictures, ArrayList<String> tag, String description, String address, int b_userID, int numberRegister, int numberParticipant) {
         this.eventId = eventId;
         this.holdTime = holdTime;
         this.eventName = eventName;
@@ -31,6 +31,8 @@ public class Event {
         this.description = description;
         this.address = address;
         this.b_userID = b_userID;
+        this.numberRegister = numberRegister;
+        this.numberParticipant = numberParticipant;
     }
 
     public Event(int eventId, LocalDateTime holdTime, String eventName, String address) {
