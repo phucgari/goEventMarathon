@@ -2,6 +2,7 @@ package com.example.goevent.view;
 
 import com.example.goevent.controller.EventController;
 import com.example.goevent.model.Event;
+import com.example.goevent.model.NormalUser;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "EventServlet", value = "/events")
 public class BUserInsideServlet extends HttpServlet {
@@ -35,6 +37,9 @@ public class BUserInsideServlet extends HttpServlet {
                 case "update":
                     updateForm(request, response);
                     break;
+                case "list-users-in-event":
+                    listUsersInEvent(request, response);
+                    break;
                 default:
                     listEvent(request, response);
                     break;
@@ -42,6 +47,18 @@ public class BUserInsideServlet extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void listUsersInEvent(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("event_id"));
+        List<NormalUser> normalUsers = eventController.showAllUserInEvent(id);
+        request.setAttribute("user", normalUsers);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("event/showListNUsers.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException | IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -55,6 +72,9 @@ public class BUserInsideServlet extends HttpServlet {
     }
 
     private void updateForm(HttpServletRequest request, HttpServletResponse response) {
+        int event_id = Integer.parseInt(request.getParameter("event_id"));
+        Event event = eventController.showByIndex(event_id);
+        request.setAttribute("event", event);
         RequestDispatcher dispatcher = request.getRequestDispatcher("event/edit.jsp");
         try {
             dispatcher.forward(request, response);
