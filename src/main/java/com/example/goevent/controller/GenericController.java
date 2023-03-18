@@ -6,7 +6,6 @@ import java.util.Collection;
 
 public interface GenericController<E> {
     String jdbcURL = "jdbc:mysql://localhost:3306/go_event?useUnicode=yes&characterEncoding=UTF-8";
-
     String jdbcUsername = "Nam";
     String jdbcPassword = "Anhnam220797anhnam";
 
