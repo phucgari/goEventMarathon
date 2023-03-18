@@ -556,11 +556,7 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>id</th>
-                <th>age</th>
-                <th>gender</th>
-                <th>address</th>
-                <th>email</th>
+
             </tr>
             </thead>
             <tbody>
