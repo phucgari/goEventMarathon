@@ -40,7 +40,7 @@ public class BusinessUserServlet extends HttpServlet {
     }
 
     private void createForm(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("business/create.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login/signupB.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -87,7 +87,7 @@ public class BusinessUserServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         BusinessUser businessUser = new BusinessUser(username, password, name, avatar, phone, gender);
         businessUserController.create(businessUser);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("bUser/create.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login/signupB.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
