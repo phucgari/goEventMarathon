@@ -84,7 +84,7 @@ public class BUserInsideServlet extends HttpServlet {
     }
 
     private void listEvent(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("event/list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("bUser/business.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
