@@ -3,6 +3,7 @@ package com.example.goevent.model;
 public class BusinessUser extends User{
     private int businessUserId;
 
+
     public BusinessUser() {
     }
 
