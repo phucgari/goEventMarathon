@@ -17,8 +17,7 @@ public class NormalUserController implements GenericController<NormalUser>{
             "n_user.gender, n_user.address, n_user.email, user.login_name, user.password FROM n_user " +
             "left join user on n_user.user_id = user.user_id WHERE n_user.n_user_id = ?";
     private static final String CREATE_NORMAL_USER = "call CREATE_NORMAL_USER();";
-    private static final String UPDATE_NORMAL_USER = "UPDATE n_user SET age = ?, gender = ?, address = ?," +
-            " email = ? WHERE n_user_id = ?";
+    private static final String UPDATE_NORMAL_USER = "call update_normal_user();";
 
 
 
@@ -52,7 +51,15 @@ public class NormalUserController implements GenericController<NormalUser>{
     public void create(NormalUser object) {
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE_NORMAL_USER)) {
-
+            preparedStatement.setString(1, object.getUserName());
+            preparedStatement.setString(2, object.getPassword());
+            preparedStatement.setString(3, object.getFullName());
+            preparedStatement.setString(4, object.getAvatar());
+            preparedStatement.setString(5, object.getPhone());
+            preparedStatement.setInt(6, object.getAge());
+            preparedStatement.setString(7, object.getGender());
+            preparedStatement.setString(8, object.getAddress());
+            preparedStatement.setString(9, object.getEmail());
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -78,7 +85,21 @@ public class NormalUserController implements GenericController<NormalUser>{
 
     @Override
     public void update(NormalUser object) {
-
+        try (Connection connection = connector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_NORMAL_USER)) {
+            preparedStatement.setString(1, object.getPassword());
+            preparedStatement.setString(2, object.getFullName());
+            preparedStatement.setString(3, object.getAvatar());
+            preparedStatement.setString(4, object.getPhone());
+            preparedStatement.setInt(5, object.getAge());
+            preparedStatement.setString(6, object.getGender());
+            preparedStatement.setString(7, object.getAddress());
+            preparedStatement.setString(8, object.getEmail());
+            preparedStatement.setInt(9, object.getNormalUserId());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
