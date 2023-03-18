@@ -36,7 +36,6 @@ public class BusinessUserController implements GenericController<BusinessUser> {
             callableStatement.setString(3, user.getFullName());
             callableStatement.setString(4, user.getAvatar());
             callableStatement.setString(5, user.getPhone());
-
             callableStatement.setString(6, user.getGender());
 
             callableStatement.executeUpdate();

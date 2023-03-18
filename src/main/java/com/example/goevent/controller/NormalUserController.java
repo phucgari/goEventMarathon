@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class NormalUserController implements GenericController<NormalUser> {
     private static final String GET_ALL_NORMAL_USER = "SELECT n_user.n_user_id, n_user.user_id, n_user.age, " +
@@ -100,7 +101,6 @@ public class NormalUserController implements GenericController<NormalUser> {
             throw new RuntimeException(e);
         }
     }
-
     @Override
     public void delete(int index) {
 
