@@ -100,10 +100,5 @@ public class NormalUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         NormalUser normalUser = new NormalUser(login_name, password, fullName, avatar, phone, age, gender, address, email);
         normalUserController.create(normalUser);
-        try {
-            request.getRequestDispatcher("nUser/create.jsp").forward(request, response);
-        } catch (ServletException | IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
