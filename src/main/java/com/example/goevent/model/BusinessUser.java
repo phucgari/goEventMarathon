@@ -3,6 +3,7 @@ package com.example.goevent.model;
 public class BusinessUser extends User{
     private int businessUserId;
 
+    private int user_id;
     private String gender;
 
     public BusinessUser() {
@@ -41,6 +42,13 @@ public class BusinessUser extends User{
     public BusinessUser(int businessUserId) {
         this.businessUserId = businessUserId;
     }
+
+    public BusinessUser(int bUserId, int userId, String name, String avatar, String phone, String gender) {
+        super(name, avatar, phone, gender);
+        this.businessUserId = bUserId;
+        this.user_id = userId;
+    }
+
 
     public int getBusinessUserId() {
         return businessUserId;

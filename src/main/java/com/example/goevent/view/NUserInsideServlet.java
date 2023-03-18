@@ -38,7 +38,7 @@ public class NUserInsideServlet extends HttpServlet {
         int nUser_id= (int) session.getAttribute("n_user_id");
         Event event=eventController.showByIndex(event_id);
         boolean registerStatus=userProcessor.checkIfUserAlreadyRegistered(nUser_id,event_id);
-        request.setAttribute("registerStatus",registerStatus);
+        request.setAttribute("registerStatus",registerStatus);//true neu dk,false neu chua dk
         request.setAttribute("event",event);
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/nUser/show1Event.jsp");
         try {
