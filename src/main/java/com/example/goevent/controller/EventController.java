@@ -113,7 +113,7 @@ public class EventController implements GenericController<Event> {
         }
         return events;
     }
-    public ArrayList<Event> showAllParticipatedEventNUser(LocalDateTime timeBegin,LocalDateTime timeEnd,String address, long minFee,long maxFee, int n_user_id){
+    public ArrayList<Event> showAllRegisteredEventNUser(LocalDateTime timeBegin, LocalDateTime timeEnd, String address, long minFee, long maxFee, int n_user_id){
         try(Connection connection= connector.getConnection();
         PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_PARTICIPATED_N_USER)) {
             preparedStatement.setTimestamp(1, Timestamp.valueOf(timeBegin));
