@@ -604,8 +604,8 @@
         <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
                 <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
-                        src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar">
-                    Antonio Moreno <b class="caret"></b></a>
+                        src="${requestScope["user"].getAvatar()}" class="avatar" alt="Avatar">
+                    ${requestScope["user"].getFullName()} <b class="caret"></b></a>
                 <div class="dropdown-menu">
                     <a href="nUser/action=edit" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
                     <div class="divider dropdown-divider"></div>
@@ -628,7 +628,7 @@
             </div>
             <div class="form-outline">
                 <textarea class="form-control" id="textAreaExample" name="address" rows="4"></textarea>
-                <label class="form-label" for="textAreaExample">Address</label>
+                <label class="form-label">Address</label>
             </div>
             <div class="form-outline">
                 <input type="text" name="minFee"/>
