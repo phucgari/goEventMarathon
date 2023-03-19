@@ -605,7 +605,7 @@
             <div class="nav-item dropdown">
                 <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
                         src="${requestScope["user"].getAvatar()}" class="avatar" alt="Avatar">
-                    ${requestScope["user"].getFullName()} <b class="caret"></b></a>
+                    ${requestScope["user"].getFullName()}</a>
                 <div class="dropdown-menu">
                     <a href="nUser?action=edit" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
                     <div class="divider dropdown-divider"></div>
