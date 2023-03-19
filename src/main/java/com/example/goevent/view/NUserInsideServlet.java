@@ -2,6 +2,7 @@ package com.example.goevent.view;
 
 import com.example.goevent.controller.EventController;
 import com.example.goevent.controller.NormalUserProcessor;
+import com.example.goevent.controller.TaskBarController;
 import com.example.goevent.model.Event;
 
 import javax.servlet.*;
@@ -17,6 +18,7 @@ public class NUserInsideServlet extends HttpServlet {
     NormalUserProcessor userProcessor=new NormalUserProcessor();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+        TaskBarController.setUpTaskBar(request,response);
         String action=request.getParameter("action");
         if(action==null)action="";
         switch (action){
