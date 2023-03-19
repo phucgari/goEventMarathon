@@ -659,6 +659,7 @@
                 <th>address</th>
                 <th>hold time</th>
                 <th>event id</th>
+                <th>Edit</th>
             </tr>
             </thead>
             <tbody>
@@ -667,7 +668,12 @@
                     <td>${event.getEventName()}</td>
                     <td>${event.getAddress()}</td>
                     <td>${event.getHoldTime()}</td>
-                    <td>${event.getEventId()}</td>
+                    <td><a href="/user?action=show1event&event_id=${event.getEventId()}">${event.getEventId()}</a></td>
+                    <td>
+                        <form>
+                            <button class="btn btn-primary profile-button" ><a href="/user?action=show1event&event_id=${event.getEventId()}">Details</a> </button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -10,6 +10,7 @@ public interface GenericController<E> {
     String jdbcUsername = "Nam";
     String jdbcPassword = "Anhnam220797anhnam";
 
+
     Connector connector = new Connector(jdbcURL, jdbcUsername, jdbcPassword);
 
     Collection<E> showAll();

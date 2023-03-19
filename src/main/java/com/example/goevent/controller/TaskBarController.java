@@ -23,7 +23,7 @@ public class TaskBarController {
             request.setAttribute("user",user);
         }else{
             try {
-                response.sendRedirect("/login");
+                response.sendRedirect("/");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
