@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-@WebServlet(name = "NUserInsideServlet", value = "/nuserinside")
+@WebServlet(name = "NUserInsideServlet", value = "/user")
 public class NUserInsideServlet extends HttpServlet {
     EventController eventController=new EventController();
     NormalUserProcessor userProcessor=new NormalUserProcessor();
@@ -38,7 +38,7 @@ public class NUserInsideServlet extends HttpServlet {
         int nUser_id= (int) session.getAttribute("n_user_id");
         Event event=eventController.showByIndex(event_id);
         boolean registerStatus=userProcessor.checkIfUserAlreadyRegistered(nUser_id,event_id);
-        request.setAttribute("registerStatus",registerStatus);
+        request.setAttribute("registerStatus",registerStatus);//true neu dk,false neu chua dk
         request.setAttribute("event",event);
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/nUser/show1Event.jsp");
         try {

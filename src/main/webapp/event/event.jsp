@@ -536,7 +536,8 @@
                 <div class="dropdown-menu">
                     <a href="event/edit.jsp" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
                     <div class="divider dropdown-divider"></div>
-                    <a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                    <a href="http://localhost:8080/" class="dropdown-item"><i class="material-icons">&#xE8AC;</i>
+                        Logout</a>
                 </div>
             </div>
         </div>

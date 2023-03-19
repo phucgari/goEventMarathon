@@ -9,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "NormalUserServlet", value = "/NormalUserServlet")
+@WebServlet(name = "NormalUserServlet", value = "/nuser")
 public class NormalUserServlet extends HttpServlet {
     NormalUserController normalUserController = new NormalUserController();
 
@@ -29,13 +29,11 @@ public class NormalUserServlet extends HttpServlet {
         }
     }
 
-
-
     private void showALlNormalUser(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<NormalUser> normalUsers = normalUserController.showAll();
             request.setAttribute("normal", normalUsers);
-            request.getRequestDispatcher("nUser/event.jsp").forward(request, response);
+            request.getRequestDispatcher("event/event.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -86,7 +84,7 @@ public class NormalUserServlet extends HttpServlet {
         NormalUser normalUser = new NormalUser(password, fullName, avatar, phone, normalUserId, age, gender, address, email);
         normalUserController.update(normalUser);
         try {
-            response.sendRedirect("");
+            response.sendRedirect("event/edit.jsp");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

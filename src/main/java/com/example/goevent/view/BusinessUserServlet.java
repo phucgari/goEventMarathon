@@ -49,6 +49,7 @@ public class BusinessUserServlet extends HttpServlet {
     }
 
     private void updateForm(HttpServletRequest request, HttpServletResponse response) {
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("business/edit.jsp");
         try {
             dispatcher.forward(request, response);
