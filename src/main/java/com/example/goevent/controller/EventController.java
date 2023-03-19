@@ -77,7 +77,7 @@ public class EventController implements GenericController<Event> {
         return null;
     }
     public ArrayList<Event> showAllEventWithFilterNUser(LocalDateTime timeBegin,LocalDateTime timeEnd,String address, long minFee,long maxFee){
-        String like= address.equals("")?"":"and address like %"+address+"%";
+        String like= address.equals("")?"":"and address like '%"+address+"%'";
 
         try(Connection connection= connector.getConnection();
         PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_FILTER_N_USER+like)){
@@ -112,7 +112,7 @@ public class EventController implements GenericController<Event> {
         return events;
     }
     public ArrayList<Event> showAllRegisteredEventNUser(LocalDateTime timeBegin, LocalDateTime timeEnd, String address, long minFee, long maxFee, int n_user_id){
-        String like= address.equals("")?"":"and address like %"+address+"%";
+        String like= address.equals("")?"":"and address like '%"+address+"%'";
         try(Connection connection= connector.getConnection();
         PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_PARTICIPATED_N_USER+like)) {
             preparedStatement.setTimestamp(1, Timestamp.valueOf(timeBegin));
