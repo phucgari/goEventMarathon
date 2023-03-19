@@ -83,10 +83,11 @@ public class EventController implements GenericController<Event> {
         PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_FILTER_N_USER)){
             preparedStatement.setTimestamp(1, Timestamp.valueOf(timeBegin));
             preparedStatement.setTimestamp(2, Timestamp.valueOf(timeEnd));
-            preparedStatement.setLong(4,minFee);
-            preparedStatement.setLong(5,maxFee);
-            String like="%"+address+"%";
-            preparedStatement.setString(6,like);
+            preparedStatement.setLong(3,minFee);
+            preparedStatement.setLong(4,maxFee);
+
+            String like= address.equals("")?"%":"%"+address+"%";
+            preparedStatement.setString(5,like);
             return getNUserEventsUsingQuery(preparedStatement);
         } catch (SQLException e) {
             throw new RuntimeException(e);
