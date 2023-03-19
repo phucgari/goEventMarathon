@@ -1,7 +1,6 @@
 package com.example.goevent.view;
 
 import com.example.goevent.controller.NormalUserController;
-import com.example.goevent.controller.TaskBarController;
 import com.example.goevent.model.NormalUser;
 
 import javax.servlet.*;
@@ -10,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "NormalUserServlet", value = "/nuser")
+@WebServlet(name = "NormalUserServlet", value = "/nUser")
 public class NormalUserServlet extends HttpServlet {
     NormalUserController normalUserController = new NormalUserController();
 
@@ -30,7 +29,6 @@ public class NormalUserServlet extends HttpServlet {
         }
     }
 
-
     private void showALlNormalUser(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<NormalUser> normalUsers = normalUserController.showAll();
@@ -42,10 +40,10 @@ public class NormalUserServlet extends HttpServlet {
     }
 
     private void showEditNormalUser(HttpServletRequest request, HttpServletResponse response) {
-        int normalUserId = Integer.parseInt(request.getParameter("normalUserId"));
-        NormalUser normalUser = normalUserController.showByIndex(normalUserId);
+        int n_user_id = (int) request.getSession().getAttribute("n_user_id");
+        NormalUser normalUser = normalUserController.showByIndex(n_user_id);
         request.setAttribute("normalUser", normalUser);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(".jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("nUser/edit.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -74,19 +72,20 @@ public class NormalUserServlet extends HttpServlet {
     }
 
     private void updateNormalUser(HttpServletRequest request, HttpServletResponse response) {
-        int normalUserId = Integer.parseInt(request.getParameter("normalUserId"));
+        int n_user_id = (int) request.getSession().getAttribute("n_user_id");
         String password = request.getParameter("password");
-        String fullName = request.getParameter("fullName");
+        String name = request.getParameter("name");
         String avatar = request.getParameter("avatar");
         String phone = request.getParameter("phone");
         int age = Integer.parseInt(request.getParameter("age"));
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        NormalUser normalUser = new NormalUser(password, fullName, avatar, phone, normalUserId, age, gender, address, email);
+        NormalUser normalUser = new NormalUser(password, name, avatar, phone, n_user_id, age, gender, address, email);
         normalUserController.update(normalUser);
+        request.setAttribute("normalUser", normalUser);
         try {
-            response.sendRedirect("event/edit.jsp");
+            response.sendRedirect("user?action=show_all_event");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

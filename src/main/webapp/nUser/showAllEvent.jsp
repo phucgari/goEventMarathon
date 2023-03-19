@@ -604,10 +604,10 @@
         <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
                 <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
-                        src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar">
-                    Antonio Moreno <b class="caret"></b></a>
+                        src="${requestScope["user"].getAvatar()}" class="avatar" alt="Avatar">
+                    ${requestScope["user"].getFullName()}</a>
                 <div class="dropdown-menu">
-                    <a href="event/edit.jsp" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+                    <a href="nUser?action=edit" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
                     <div class="divider dropdown-divider"></div>
                     <a href="http://localhost:8080/" class="dropdown-item"><i class="material-icons">&#xE8AC;</i>
                         Logout</a>
@@ -617,17 +617,18 @@
     </div>
 </nav>
 <div style="max-width: 1300px; margin: auto">
-    <form action="/user?action=show_all_event" method="get">
+    <form action="/user" method="get">
         <div id="time">
             <div class="form-outline timepicker-inline-24">
-                <input type="date" name="timeBegin">
+                <input type="hidden" name="action" value="show_all_event">
+                <input type="datetime-local" name="timeBegin">
                 <label class="form-label">Select a time Begin</label>&nbsp&nbsp&nbsp&nbsp
-                <input type="date" name="timeEnd">
+                <input type="datetime-local" name="timeEnd">
                 <label class="form-label">Select a time End</label>
             </div>
             <div class="form-outline">
                 <textarea class="form-control" id="textAreaExample" name="address" rows="4"></textarea>
-                <label class="form-label" for="textAreaExample">Address</label>
+                <label class="form-label">Address</label>
             </div>
             <div class="form-outline">
                 <input type="text" name="minFee"/>

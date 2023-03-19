@@ -1,6 +1,7 @@
 package com.example.goevent.view;
 
 import com.example.goevent.controller.EventController;
+import com.example.goevent.model.BusinessUser;
 import com.example.goevent.model.Event;
 import com.example.goevent.model.NormalUser;
 

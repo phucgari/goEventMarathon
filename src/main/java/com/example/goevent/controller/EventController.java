@@ -27,12 +27,16 @@ public class EventController implements GenericController<Event> {
             "join tag_event on tag.tag_id=tag_event.tag_id " +
             "join event on tag_event.event_id=event.event_id " +
             "where event.event_id=?";
-    private final String SHOW_ALL_EVENT_BY_ID="select * from event where event_id=?";
-    private final String FIND_PICTURE_BY_EVENT_ID=
+    private final String SHOW_ALL_EVENT_BY_ID=
             "select count(*) as number_register,SUM(event_n_user.checkin=true) AS number_participant ,event.* " +
+                    "from event " +
+                    "left join event_n_user on event.event_id=event_n_user.event_id " +
+                    "where event.event_id=?";
+    private final String FIND_PICTURE_BY_EVENT_ID=
+            "select picture.* " +
             "from event " +
-            "left join event_n_user on event.event_id=event_n_user.event_id " +
-            "where event_id=?";
+            "join picture on event.event_id=picture.event_id " +
+            "where event.event_id=?";
     private final String SHOW_ALL_EVENT_PARTICIPATED_N_USER =
             "select *  " +
             "from event  " +
@@ -77,7 +81,7 @@ public class EventController implements GenericController<Event> {
         return null;
     }
     public ArrayList<Event> showAllEventWithFilterNUser(LocalDateTime timeBegin,LocalDateTime timeEnd,String address, long minFee,long maxFee){
-        String like= address.equals("")?"":"and address like %"+address+"%";
+        String like= address.equals("")?"":"and address like '%"+address+"%'";
 
         try(Connection connection= connector.getConnection();
         PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_FILTER_N_USER+like)){
@@ -112,7 +116,7 @@ public class EventController implements GenericController<Event> {
         return events;
     }
     public ArrayList<Event> showAllRegisteredEventNUser(LocalDateTime timeBegin, LocalDateTime timeEnd, String address, long minFee, long maxFee, int n_user_id){
-        String like= address.equals("")?"":"and address like %"+address+"%";
+        String like= address.equals("")?"":"and address like '%"+address+"%'";
         try(Connection connection= connector.getConnection();
         PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_PARTICIPATED_N_USER+like)) {
             preparedStatement.setTimestamp(1, Timestamp.valueOf(timeBegin));
@@ -198,6 +202,7 @@ public class EventController implements GenericController<Event> {
             int numberParticipant=resultSet.getInt("number_participant");
             ArrayList<String>pictures=new ArrayList<>();
             try(PreparedStatement findPicture=connection.prepareStatement(FIND_PICTURE_BY_EVENT_ID)){
+                findPicture.setInt(1,index);
                 ResultSet pictureResult=findPicture.executeQuery();
                 while (pictureResult.next()){
                     pictures.add(pictureResult.getString("src"));
