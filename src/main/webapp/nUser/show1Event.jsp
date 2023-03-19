@@ -736,21 +736,22 @@
         </c:forEach>
     </div>
     <div align="center">
-        <c:if test="${requestScope['registerStatus']}">
-            <form method="post">
-                <input type="hidden" name="event_id" value="${requestScope['event'].getEventId()}">
-                <input type="hidden" name="req" value="false">
-                <button style="color: red">Unregister event</button>
-            </form>
-        </c:if>
-
-        <c:otherwise>
-            <form method="post">
-                <input type="hidden" name="event_id" value="${requestScope['event'].getEventId()}">
-                <input type="hidden" name="req" value="true">
-                <button style="color: #2fff00">Register this event</button>
-            </form>
-        </c:otherwise>
+        <c:choose>
+            <c:when test="${requestScope['registerStatus']}">
+                <form method="post">
+                    <input type="hidden" name="event_id" value="${requestScope['event'].getEventId()}">
+                    <input type="hidden" name="req" value="false">
+                    <button class="btn btn-danger profile-button" style="padding: 5px">Unregister event</button>
+                </form>
+            </c:when>
+            <c:otherwise>
+                <form method="post">
+                    <input type="hidden" name="event_id" value="${requestScope['event'].getEventId()}">
+                    <input type="hidden" name="req" value="true">
+                    <button class="btn btn-success profile-button" style="padding: 5px">Register this event</button>
+                </form>
+            </c:otherwise>
+        </c:choose>
     </div>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
