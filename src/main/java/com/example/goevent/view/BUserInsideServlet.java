@@ -41,7 +41,7 @@ public class BUserInsideServlet extends HttpServlet {
                     listUsersInEvent(request, response);
                     break;
                 default:
-                    listEvent(request, response);
+                    listEvents(request, response);
                     break;
 
             }
@@ -83,19 +83,21 @@ public class BUserInsideServlet extends HttpServlet {
         }
     }
 
-    private void listEvent(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("bUser/business.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
-            throw new RuntimeException(e);
-        }
+    private void listEvents(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("n_user_id"));
+        List<Event> events = eventController.showAllEventForBUser(id);
+        request.setAttribute("events", events);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("event/showListEventsByBUser.jsp");
+        dispatcher.forward(request, response);
     }
+
 
     //===============================Method Post=================================
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -141,14 +143,42 @@ public class BUserInsideServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("event/create");
         try {
             dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     private void updateEvent(HttpServletRequest request, HttpServletResponse response) {
+        LocalDateTime hold_time = LocalDateTime.parse(request.getParameter("hold_time"));
+        String event_name = request.getParameter("event_name");
+        Long fee = Long.valueOf(request.getParameter("fee"));
+        String prof_pic = request.getParameter("prof_picture");
+        String desc = request.getParameter("description");
+        String address = request.getParameter("address");
 
+        int event_id = Integer.parseInt(request.getParameter("event_id"));
+
+        HttpSession session = request.getSession();
+        int b_user_id = (int) session.getAttribute("b_user_id");
+
+        String[] picArrs = request.getParameterValues("src");
+        ArrayList<String> pics = new ArrayList<>();
+        for (String pic : picArrs) {
+            pics.add(pic);
+        }
+
+        String[] tagArrs = request.getParameterValues("tag_name");
+        ArrayList<String> tags = new ArrayList<>();
+        for (String tag : tagArrs) {
+            tags.add(tag);
+        }
+        Event event = new Event(hold_time, event_name, fee, prof_pic, pics, tags, desc, address, b_user_id);
+        eventController.update(event);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("event/edit.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
