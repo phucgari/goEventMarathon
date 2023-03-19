@@ -21,8 +21,7 @@ public class EventController implements GenericController<Event> {
             "select * from event " +
             "where disable=false " +
             "and hold_time between ? and ? " +
-            "and fee between ? and ?"+
-            "and address like ? " ;
+            "and fee between ? and ? ";
     private final String FIND_TAG_BY_EVENT_ID =
             "select tag.* from tag " +
             "join tag_event on tag.tag_id=tag_event.tag_id " +
@@ -42,7 +41,6 @@ public class EventController implements GenericController<Event> {
             "where disable=false  " +
             "and hold_time between ? and ? " +
             "and fee between ? and ? " +
-            "and event.address like ? " +
             "and n_user.n_user_id= ?";
     private final String ADD_TAG="insert into tag(tag_name) values (?)";
     private final String ADD_NEW_EVENT=
@@ -79,15 +77,14 @@ public class EventController implements GenericController<Event> {
         return null;
     }
     public ArrayList<Event> showAllEventWithFilterNUser(LocalDateTime timeBegin,LocalDateTime timeEnd,String address, long minFee,long maxFee){
+        String like= address.equals("")?"":"and address like %"+address+"%";
+
         try(Connection connection= connector.getConnection();
-        PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_FILTER_N_USER)){
+        PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_FILTER_N_USER+like)){
             preparedStatement.setTimestamp(1, Timestamp.valueOf(timeBegin));
             preparedStatement.setTimestamp(2, Timestamp.valueOf(timeEnd));
             preparedStatement.setLong(3,minFee);
             preparedStatement.setLong(4,maxFee);
-
-            String like= address.equals("")?"%":"%"+address+"%";
-            preparedStatement.setString(5,like);
             return getNUserEventsUsingQuery(preparedStatement);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -115,14 +112,14 @@ public class EventController implements GenericController<Event> {
         return events;
     }
     public ArrayList<Event> showAllRegisteredEventNUser(LocalDateTime timeBegin, LocalDateTime timeEnd, String address, long minFee, long maxFee, int n_user_id){
+        String like= address.equals("")?"":"and address like %"+address+"%";
         try(Connection connection= connector.getConnection();
-        PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_PARTICIPATED_N_USER)) {
+        PreparedStatement preparedStatement= connection.prepareStatement(SHOW_ALL_EVENT_PARTICIPATED_N_USER+like)) {
             preparedStatement.setTimestamp(1, Timestamp.valueOf(timeBegin));
             preparedStatement.setTimestamp(2, Timestamp.valueOf(timeEnd));
             preparedStatement.setLong(3,minFee);
             preparedStatement.setLong(4,maxFee);
-            preparedStatement.setString(5,"%"+address+"%");
-            preparedStatement.setInt(6,n_user_id);
+            preparedStatement.setInt(5,n_user_id);
             return getNUserEventsUsingQuery(preparedStatement);
         } catch (SQLException e) {
             throw new RuntimeException(e);

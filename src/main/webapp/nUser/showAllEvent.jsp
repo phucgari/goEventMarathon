@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<html lang="en">
 <head>
     <title>Title</title>
     <meta charset="utf-8">
@@ -18,6 +18,18 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Event List</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
         body {
             color: #566787;
@@ -283,23 +295,7 @@
         .modal form label {
             font-weight: normal;
         }
-    </style>
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Beautiful Bootstrap Navbar with Menu Icons</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <style>
+
         body {
             background: #eeeeee;
             font-family: 'Varela Round', sans-serif;
@@ -505,30 +501,107 @@
                 width: 100%;
             }
         }
+
+        body {
+            margin-top: 20px;
+        }
+
+
+        .p-table th,
+        .p-table td {
+            vertical-align: middle !important;
+        }
+
+
+        .p-team img {
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+        }
+
+        .p-progress .progress {
+            margin-bottom: 5px;
+        }
+
+        .p-name a {
+            font-size: 14px;
+            /*font-weight:bold;*/
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .p-details .bio-row p span {
+            width: auto;
+        }
+
+        .p-details .bio-row p span.bold {
+            width: 100px;
+        }
+
+        .p-team a {
+            display: inline-block;
+        }
+
+        .project-heading {
+            font-size: 20px;
+        }
+
+        .mtop20 {
+            margin-top: 20px;
+        }
+
+        .p-files li a {
+            margin-bottom: 10px;
+            color: #949494;
+            display: block;
+        }
+
+        .p-files li i {
+            padding-right: 10px;
+            width: 20px;
+        }
+
+        .p-tag-list li {
+            display: inline-block;
+            margin: 0 5px 7px 0;
+        }
+
+        .p-tag-list li a {
+            display: inline-block;
+            border: 1px solid #ddd;
+            padding: 3px 10px;
+            color: #797979;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .p-tag-list li a:hover {
+            background: #ff6c60;
+            border-color: #ff6c60;
+            color: #fff;
+        }
+
+        .m-thumb img {
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        #time {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-    <a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Brand<b>Name</b></a>
+    <a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Event <b></b></a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Collection of nav links, forms, and other content for toggling -->
     <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-        <form class="navbar-form form-inline">
-            <div class="input-group search-box">
-                <input type="text" id="search" class="form-control" placeholder="Search here...">
-                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-            </div>
-        </form>
         <div class="navbar-nav ml-auto">
-            <a href="#" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-gears"></i><span>Projects</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-users"></i><span>Team</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-pie-chart"></i><span>Reports</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-briefcase"></i><span>Careers</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-envelope"></i><span>Messages</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-bell"></i><span>Notifications</span></a>
             <div class="nav-item dropdown">
                 <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
                         src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar">
@@ -543,45 +616,42 @@
         </div>
     </div>
 </nav>
-</body>
-</html>
-<form action="/nuserinside?action=show_all_event" method="get">
-    <div class="row">
-        <div class="col-5">
-            <input type="datetime-local" name="timeBegin" id="timeBegin"  min="1900-06-07T00:00" max="2100-06-14T00:00" size="35"
-                   value='2018-06-07T00:00'>
+<div style="max-width: 1300px; margin: auto">
+    <form action="/user?action=show_all_event" method="get">
+        <div id="time">
+            <div class="form-outline timepicker-inline-24">
+                <input type="date" name="timeBegin">
+                <label class="form-label">Select a time Begin</label>&nbsp&nbsp&nbsp&nbsp
+                <input type="date" name="timeEnd">
+                <label class="form-label">Select a time End</label>
+            </div>
+            <div class="form-outline">
+                <textarea class="form-control" id="textAreaExample" name="address" rows="4"></textarea>
+                <label class="form-label" for="textAreaExample">Address</label>
+            </div>
+            <div class="form-outline">
+                <input type="text" name="minFee"/>
+                <label class="form-label">min Fee</label>&nbsp&nbsp
+                <input type="text" name="maxFee"/>
+                <label class="form-label">max Fee</label>&nbsp&nbsp&nbsp&nbsp
+                <button type="submit"
+                        class="btn btn-sm btn-success" style="font-size: 15px; background-color: rgb(146 109 222)">
+                    search
+                </button>
+            </div>
         </div>
-        <div class="col-5">
-            <input type="datetime-local" name="timeEnd" id="timeEnd"  min="1900-06-07T00:00" max="2100-06-14T00:00" size="35"
-                   value='2024-06-14T00:00'>
-        </div>
-        <div class="col-5">
-            <input type="text" class="inputlg form-control"
-                   name="address">
-        </div>
-        <div class="col-5">
-            <input type="number" class="inputlg form-control"
-                   name="minFee">
-        </div>
-        <div class="col-5">
-            <input type="number" class="inputlg form-control"
-                   name="maxFee">
-        </div>
-        <div class="col-2">
-            <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-success"> search</button> </span>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 <div class="container">
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h2>Normal <b>Management</b></h2>
+                    <h2>Event <b>List</b></h2>
                 </div>
             </div>
         </div>
-        <table class="table table-striped table-hover">
+        <table style="text-align: center" class="table table-striped table-hover">
             <thead>
             <tr>
                 <th>event name</th>
@@ -591,31 +661,32 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="n" items="${requestScope.events}">
+            <c:forEach var="event" items="${requestScope['events']}">
                 <tr>
-                    <td><c:out value="${n.event_name}"/></td>
-                    <td><c:out value="${n.address}"/></td>
-                    <td><c:out value="${n.hold_time}"/></td>
-                    <td><c:out value="${n.event_id}"/></td>
+                    <td>${event.getEventName()}</td>
+                    <td>${event.getAddress()}</td>
+                    <td>${event.getHoldTime()}</td>
+                    <td>${event.getEventId()}</td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
-        <div class="clearfix">
-            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-            <ul class="pagination">
-                <li class="page-item disabled"><a href="#">Previous</a></li>
-                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">Next</a></li>
-            </ul>
-        </div>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+<script>
+    const pickerInline = document.querySelector('.timepicker-inline-24');
+    const timepickerMaxMin = new mdb.Timepicker(pickerInline, {format24: true, inline: true});
+</script>
 </body>
 </html>
