@@ -178,12 +178,11 @@ public class BUserInsideServlet extends HttpServlet {
         for (String tag : tagArrs) {
             tags.add(tag);
         }
-        Event event = new Event(hold_time, event_name, fee, prof_pic, pics, tags, desc, address, b_user_id);
+        Event event = new Event(event_id,hold_time, event_name, fee, prof_pic, pics, tags, desc, address, b_user_id);
         eventController.update(event);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("test/edit.jsp");
         try {
-            dispatcher.forward(request, response);
-        } catch (ServletException | IOException e) {
+            response.sendRedirect("/events");
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
