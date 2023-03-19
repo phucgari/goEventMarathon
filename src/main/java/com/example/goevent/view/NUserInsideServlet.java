@@ -72,9 +72,9 @@ public class NUserInsideServlet extends HttpServlet {
     }
 
     private void showAllEvent(HttpServletRequest request, HttpServletResponse response) {
-        LocalDateTime timeBegin= request.getParameter("timeBegin")==null?LocalDateTime.MIN:
+        LocalDateTime timeBegin= request.getParameter("timeBegin")==null?LocalDateTime.of(1900,01,01,00,00,00):
                 LocalDateTime.parse(request.getParameter("timeBegin"));
-        LocalDateTime timeEnd =request.getParameter("timeEnd")==null?LocalDateTime.MAX:
+        LocalDateTime timeEnd =request.getParameter("timeEnd")==null?LocalDateTime.of(2100,01,01,00,00,00):
                 LocalDateTime.parse(request.getParameter("timeEnd"));
         String address=request.getParameter("address")==null?"":
                 request.getParameter("address");
