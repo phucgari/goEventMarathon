@@ -63,7 +63,8 @@ public class EventController implements GenericController<Event> {
                     "fee=?, " +
                     "prof_picture=?, " +
                     "description=?, " +
-                    "address=? "
+                    "address=? " +
+                    "where event_id=?"
                     ;
     private final String ADD_PICTURE_BY_ID=
             "insert into picture(event_id,src) " +
@@ -232,6 +233,7 @@ public class EventController implements GenericController<Event> {
                 preparedStatement.setString(4,object.getProfilePic());
                 preparedStatement.setString(5, object.getDescription());
                 preparedStatement.setString(6,object.getAddress());
+                preparedStatement.setInt(7,object.getEventId());
                 preparedStatement.execute();
             }
             try(PreparedStatement preparedStatement=connection.prepareStatement(DELETE_PICTURES)){
