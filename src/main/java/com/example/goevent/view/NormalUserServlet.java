@@ -1,6 +1,7 @@
 package com.example.goevent.view;
 
 import com.example.goevent.controller.NormalUserController;
+import com.example.goevent.controller.TaskBarController;
 import com.example.goevent.model.NormalUser;
 
 import javax.servlet.*;
