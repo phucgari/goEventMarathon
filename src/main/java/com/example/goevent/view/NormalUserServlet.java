@@ -1,7 +1,6 @@
 package com.example.goevent.view;
 
 import com.example.goevent.controller.NormalUserController;
-import com.example.goevent.controller.TaskBarController;
 import com.example.goevent.model.NormalUser;
 
 import javax.servlet.*;
@@ -10,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "NormalUserServlet", value = "/nuser")
+@WebServlet(name = "NormalUserServlet", value = "/nUser")
 public class NormalUserServlet extends HttpServlet {
     NormalUserController normalUserController = new NormalUserController();
 

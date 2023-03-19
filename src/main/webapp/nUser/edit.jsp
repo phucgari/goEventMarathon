@@ -74,37 +74,37 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <form action="/nuser?action=edit" method="post">
+                <form action="edit" method="post">
                     <div class="row mt-3">
                         <div class="col-md-12"><label class="labels">Full Name</label><input type="text"
                                                                                              class="form-control"
-                                                                                             value="<c:out value='${requestScope.normalUser.name}' />">
+                                                                                             value="${requestScope["normalUser"].getFullName()}">
                         </div>
                         <div class="col-md-12"><label class="labels">Avatar</label><input type="text"
                                                                                           class="form-control"
-                                                                                          value="<c:out value='${requestScope.normalUser.avatar}' />">
+                                                                                          value="${requestScope["normalUser"].getAvatar()}">
                         </div>
                         <div class="col-md-12"><label class="labels">Phone</label><input type="text"
                                                                                          class="form-control"
-                                                                                         value="<c:out value='${requestScope.normalUser.phone}' />">
+                                                                                         value="${requestScope["normalUser"].getPhone()}">
                         </div>
-                        <input type="hidden" class="form-control" value="<c:out value='${requestScope.normalUser.n_user_id}' />">
+                        <input type="hidden" class="form-control" value="${requestScope["normalUser"].getNormalUserId()}">
                     </div>
                     <div class="col-md-12"><label class="labels">Age</label><input type="text" class="form-control"
-                                                                                   value="<c:out value='${requestScope.normalUser.age}' />">
+                                                                                   value="${requestScope["normalUser"].getAge()}">
                     </div>
                     <div class="col-md-12"><label class="labels">Gender</label><input type="text" class="form-control"
-                                                                                      value="<c:out value='${requestScope.normalUser.gender}' />">
+                                                                                      value="${requestScope["normalUser"].getGender()}">
                     </div>
                     <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control"
-                                                                                       value="<c:out value='${requestScope.normalUser.address}' />">
+                                                                                       value="${requestScope["normalUser"].getAddress()}">
                     </div>
                     <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control"
-                                                                                     value="<c:out value='${requestScope.normalUser.email}' />">
+                                                                                     value="${requestScope["normalUser"].getEmail()}">
                     </div>
                     <div class="col-md-12"><label class="labels">Password</label><input type="text"
                                                                                         class="form-control"
-                                                                                        value="<c:out value='${requestScope.normalUser.password}' />">
+                                                                                        value="${requestScope["normalUser"].getPassword()}">
                     </div>
                     <div class="mt-5 text-center">
                         <button class="btn btn-primary profile-button" type="button">Save Profile</button>
