@@ -74,7 +74,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <form action="edit" method="post">
+                <form method="post">
                     <div class="row mt-3">
                         <div class="col-md-12"><label class="labels">Full Name</label><input type="text"
                                                                                              class="form-control"
@@ -90,7 +90,7 @@
                         </div>
                         <input type="hidden" class="form-control" value="${requestScope["normalUser"].getNormalUserId()}">
                     </div>
-                    <div class="col-md-12"><label class="labels">Age</label><input type="text" class="form-control"
+                    <div class="col-md-12"><label class="labels">Age</label><input type="number" class="form-control"
                                                                                    value="${requestScope["normalUser"].getAge()}">
                     </div>
                     <div class="col-md-12"><label class="labels">Gender</label><input type="text" class="form-control"

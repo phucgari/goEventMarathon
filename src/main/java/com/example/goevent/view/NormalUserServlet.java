@@ -40,7 +40,7 @@ public class NormalUserServlet extends HttpServlet {
     }
 
     private void showEditNormalUser(HttpServletRequest request, HttpServletResponse response) {
-        int n_user_id = Integer.parseInt(request.getParameter("n_user_id"));
+        int n_user_id = (int) request.getSession().getAttribute("n_user_id");
         NormalUser normalUser = normalUserController.showByIndex(n_user_id);
         request.setAttribute("normalUser", normalUser);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("nUser/edit.jsp");
