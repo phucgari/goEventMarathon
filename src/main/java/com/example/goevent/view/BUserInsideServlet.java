@@ -44,10 +44,9 @@ public class BUserInsideServlet extends HttpServlet {
                 default:
                     listEvents(request, response);
                     break;
-
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -86,7 +85,8 @@ public class BUserInsideServlet extends HttpServlet {
 
     private void listEvents(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("n_user_id"));
+        HttpSession session = request.getSession();
+        int id = (int) session.getAttribute("b_user_id");
         List<Event> events = eventController.showAllEventForBUser(id);
         request.setAttribute("events", events);
         RequestDispatcher dispatcher = request.getRequestDispatcher("event/showListEventsByBUser.jsp");
@@ -103,17 +103,13 @@ public class BUserInsideServlet extends HttpServlet {
         if (action == null) {
             action = "";
         }
-        try {
-            switch (action) {
-                case "create":
-                    createEvent(request, response);
-                    break;
-                case "update":
-                    updateEvent(request, response);
-                    break;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        switch (action) {
+            case "create":
+                createEvent(request, response);
+                break;
+            case "update":
+                updateEvent(request, response);
+                break;
         }
     }
 
@@ -129,19 +125,23 @@ public class BUserInsideServlet extends HttpServlet {
 
         int b_user_id = (int) session.getAttribute("b_user_id");
 
-        String[] tagsArr = request.getParameterValues("tag_name");
+        String[] tagsArr = request.getParameter("tag_name").split("\n");
         ArrayList<String> tags = new ArrayList<>();
-        for (String tag : tagsArr) {
-            tags.add(tag);
+        if (tagsArr != null) {
+            for (String tag : tagsArr) {
+                tags.add(tag);
+            }
         }
 
-        String[] picArr = request.getParameterValues("src");
+        String[] picArr = request.getParameter("src").split("\n");
         ArrayList<String> pics = new ArrayList<>();
-        for (String pic : picArr) {
-            pics.add(pic);
+        if (picArr != null) {
+            for (String pic : picArr) {
+                pics.add(pic);
+            }
         }
         eventController.create(new Event(hold_time, event_name, fee, prof_picture, pics, tags, description, address, b_user_id));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("event/create");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("event/create.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -159,6 +159,7 @@ public class BUserInsideServlet extends HttpServlet {
 
         int event_id = Integer.parseInt(request.getParameter("event_id"));
 
+
         HttpSession session = request.getSession();
         int b_user_id = (int) session.getAttribute("b_user_id");
 
@@ -175,7 +176,7 @@ public class BUserInsideServlet extends HttpServlet {
         }
         Event event = new Event(hold_time, event_name, fee, prof_pic, pics, tags, desc, address, b_user_id);
         eventController.update(event);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("event/edit.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("test/edit.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {

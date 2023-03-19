@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "BusinessUserServlet", value = "/BusinessUserServlet")
+@WebServlet(name = "BusinessUserServlet", value = "/busers")
 public class BusinessUserServlet extends HttpServlet {
 
     private BusinessUserController businessUserController;

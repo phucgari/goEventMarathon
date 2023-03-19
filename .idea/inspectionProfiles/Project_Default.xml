@@ -6,7 +6,20 @@
         <language minSize="92" name="Java" />
       </Languages>
     </inspection_tool>
+    <inspection_tool class="ManualArrayToCollectionCopy" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="MismatchedCollectionQueryUpdate" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="queryNames">
+        <value />
+      </option>
+      <option name="updateNames">
+        <value />
+      </option>
+      <option name="ignoredClasses">
+        <value />
+      </option>
+    </inspection_tool>
     <inspection_tool class="SqlDialectInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SqlNoDataSourceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UseBulkOperation" enabled="false" level="WARNING" enabled_by_default="false" />
   </profile>
 </component>

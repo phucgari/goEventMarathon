@@ -33,7 +33,7 @@ public class NormalUserServlet extends HttpServlet {
         try {
             List<NormalUser> normalUsers = normalUserController.showAll();
             request.setAttribute("normal", normalUsers);
-            request.getRequestDispatcher("event/event.jsp").forward(request, response);
+            request.getRequestDispatcher("event/edit.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }

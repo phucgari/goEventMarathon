@@ -75,6 +75,8 @@ public class Event {
         this.numberParticipant=numberParticipant;
     }
 
+
+
     public long getFee() {
         return fee;
     }
@@ -170,4 +172,5 @@ public class Event {
     public void setAddress(String address) {
         this.address = address;
     }
+
 }
