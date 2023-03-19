@@ -62,24 +62,26 @@
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
+            <div align="center">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Create New Event</h4>
                 </div>
 
-                <form method="post" action="">
+                <form method="post">
+                    <input type="hidden" value="create" name="action">
                     <div class="col-md-12">
                         <label class="labels">Hold Time</label>
-                        <input type="datetime-local" class="form-control" name="password" placeholder="Enter Hold Time"
+                        <input type="datetime-local" class="form-control" name="hold_time" placeholder="Enter Hold Time"
                                value="">
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Event Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Enter Event Name" value="">
+                        <input type="text" class="form-control" name="event_name" placeholder="Enter Event Name"
+                               value="">
                     </div>
                     <div class="col-md-12">
                         <label class="labels">Fee</label>
-                        <input type="number" class="form-control" name="avatar" placeholder="Enter Fee"
+                        <input type="number" class="form-control" name="fee" placeholder="Enter Fee"
                                value="">
                     </div>
                     <div class="col-md-12">
@@ -101,16 +103,17 @@
 
                     <div class="col-md-12">
                         <label class="labels">Tags</label>
-                        <select name="tags">
-                            <c:forEach var="option" items="${tags}">
-                                <option value="${option.tag_id}">${option.tag_name}</option>
-                            </c:forEach>
-                        </select>
+                        <textarea type="text" class="form-control" name="tag_name"
+                                  placeholder="Tag, down the line to add more tags"></textarea>
                     </div>
 
                     <div class="col-md-12">
-                        <label class="labels"></label>
+                        <label class="labels">Photos</label>
+                        <textarea type="text" class="form-control" name="src"
+                                  placeholder="IMG Link, down the line to add more photos."></textarea>
                     </div>
+
+
                     <div class="mt-5 text-center">
                         <input class="btn btn-primary profile-button" type="submit" value="Save"></input>
                     </div>

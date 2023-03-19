@@ -663,7 +663,7 @@
                     <h2>Event <b>List</b></h2>
                 </div>
                 <div class="col-sm-6">
-                    <button type="button" class="btn btn-primary profile-button"><a href="/event/create.jsp" style="text-decoration: none">New Event</a></button>
+                    <button type="button" class="btn btn-primary profile-button"><a href="/events?action=create" style="text-decoration: none">New Event</a></button>
                 </div>
             </div>
         </div>
