@@ -604,8 +604,8 @@
         <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
                 <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
-                        src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar">
-                    Antonio Moreno <b class="caret"></b></a>
+                        src="${requestScope["user"].getAvatar()}" class="avatar" alt="Avatar">
+                    ${requestScope["user"].getFullName()} <b class="caret"></b></a>
                 <div class="dropdown-menu">
                     <a href="event/edit.jsp" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
                     <div class="divider dropdown-divider"></div>

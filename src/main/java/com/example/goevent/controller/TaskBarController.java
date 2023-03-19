@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class TaskBarController {
-    public static void setUpTaskBar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public static void setUpTaskBar(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session=request.getSession();
         if(session.getAttribute("n_user_id")!=null){
             int n_user_id= (int) session.getAttribute("n_user_id");
@@ -22,7 +22,11 @@ public class TaskBarController {
             BusinessUser user=businessUserController.showByIndex(b_user_id);
             request.setAttribute("user",user);
         }else{
-            response.sendRedirect("/login");
+            try {
+                response.sendRedirect("/login");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

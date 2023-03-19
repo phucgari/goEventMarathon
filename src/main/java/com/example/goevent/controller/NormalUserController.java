@@ -75,7 +75,9 @@ public class NormalUserController implements GenericController<NormalUser> {
              PreparedStatement preparedStatement = connection.prepareStatement(GET_NORMAL_USER_BY_ID)) {
             preparedStatement.setInt(1, index);
             ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
             result = getNormalUser(resultSet);
+
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
