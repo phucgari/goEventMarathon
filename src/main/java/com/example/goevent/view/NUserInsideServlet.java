@@ -43,9 +43,7 @@ public class NUserInsideServlet extends HttpServlet {
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/nUser/show1Event.jsp");
         try {
             requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -68,9 +66,7 @@ public class NUserInsideServlet extends HttpServlet {
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/nUser/showAllRegisteredEvent.jsp");
         try {
             requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -91,9 +87,7 @@ public class NUserInsideServlet extends HttpServlet {
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/nUser/showAllEvent.jsp");
         try {
             requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -102,10 +96,8 @@ public class NUserInsideServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         String action=request.getParameter("action");
         if(action==null)action="";
-        switch (action){
-            case "show1event":
-                registerNUser(request,response);
-                break;
+        if (action.equals("show1event")) {
+            registerNUser(request, response);
         }
     }
 
