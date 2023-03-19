@@ -1,24 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Nam
-  Date: 3/18/2023
-  Time: 4:21 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
-    <title>Title</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Event List</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
@@ -27,10 +17,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
+
         body {
             color: #566787;
             background: #f5f5f5;
@@ -151,10 +139,6 @@
             margin-right: 10px;
         }
 
-        .pagination {
-            float: right;
-            margin: 0 0 5px;
-        }
 
         .pagination li a {
             border: none;
@@ -190,16 +174,6 @@
             padding-top: 6px
         }
 
-        .hint-text {
-            float: left;
-            margin-top: 10px;
-            font-size: 13px;
-        }
-
-        /* Custom checkbox */
-        .custom-checkbox {
-            position: relative;
-        }
 
         .custom-checkbox input[type="checkbox"] {
             opacity: 0;
@@ -348,6 +322,17 @@
         .search-box input:focus {
             background: #fff;
             box-shadow: none;
+        }
+
+        body {
+            font-family: Lato;
+            font-weight: 600;
+        }
+
+        h1 {
+            padding-left: 120px;
+            color: #043e46;
+            font-size: 2.2em;
         }
 
         .search-box .input-group-addon {
@@ -528,9 +513,6 @@
             /*font-weight:bold;*/
         }
 
-        .bold {
-            font-weight: bold;
-        }
 
         .p-details .bio-row p span {
             width: auto;
@@ -542,14 +524,6 @@
 
         .p-team a {
             display: inline-block;
-        }
-
-        .project-heading {
-            font-size: 20px;
-        }
-
-        .mtop20 {
-            margin-top: 20px;
         }
 
         .p-files li a {
@@ -591,6 +565,105 @@
         #time {
             margin-bottom: 10px;
         }
+
+        /*general styles*/
+
+        body {
+            padding: 3em;
+            background-color: #ccc;
+        }
+
+        html {
+            box-sizing: border-box;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+
+        /*slideshow styles*/
+
+        .slideshow {
+            width: 625px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: solid 1px white;
+        }
+
+        .slideshow-container {
+            width: 2500px;
+            font-size: 0;
+            transition: 1s ease;
+            height: 225px;
+        }
+
+        .slideshow-container:hover {
+            animation-play-state: paused;
+        }
+
+        .text-container {
+            height: 225px;
+            position: relative;
+        }
+
+
+        p {
+            position: relative;
+            top: -45%;
+            padding: 5px;
+        }
+
+        .slide {
+            animation: slide 24s ease infinite;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0%);
+            }
+
+            12.5% {
+                transform: translateX(0%);
+            }
+
+            25% {
+                transform: translateX(-25%);
+            }
+
+            37.5% {
+                transform: translateX(-25%);
+            }
+
+            50% {
+                transform: translateX(-50%);
+            }
+
+            62.5% {
+                transform: translateX(-50%);
+            }
+
+            75% {
+                transform: translateX(-75%);
+            }
+
+            87.5% {
+                transform: translateX(-75%);
+            }
+
+            99% {
+                transform: translateX(-75%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .p {
+            margin-top: 140px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -603,11 +676,11 @@
     <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
         <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
-                <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
+                <a data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
                         src="${requestScope["user"].getAvatar()}" class="avatar" alt="Avatar">
                     ${requestScope["user"].getFullName()}</a>
                 <div class="dropdown-menu">
-                    <a href="nUser?action=edit" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+                    <a href="nUser/action=edit" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
                     <div class="divider dropdown-divider"></div>
                     <a href="http://localhost:8080/" class="dropdown-item"><i class="material-icons">&#xE8AC;</i>
                         Logout</a>
@@ -616,72 +689,67 @@
         </div>
     </div>
 </nav>
-<div style="max-width: 1300px; margin: auto">
-    <form action="/user" method="get">
-        <div id="time">
-            <div class="form-outline timepicker-inline-24">
-                <input type="hidden" name="action" value="show_all_event">
-                <input type="datetime-local" name="timeBegin">
-                <label class="form-label">Select a time Begin</label>&nbsp&nbsp&nbsp&nbsp
-                <input type="datetime-local" name="timeEnd">
-                <label class="form-label">Select a time End</label>
-            </div>
-            <div class="form-outline">
-                <textarea class="form-control" id="textAreaExample" name="address" rows="4"></textarea>
-                <label class="form-label">Address</label>
-            </div>
-            <div class="form-outline">
-                <input type="text" name="minFee"/>
-                <label class="form-label">min Fee</label>&nbsp&nbsp
-                <input type="text" name="maxFee"/>
-                <label class="form-label">max Fee</label>&nbsp&nbsp&nbsp&nbsp
-                <button type="submit"
-                        class="btn btn-sm btn-success" style="font-size: 15px; background-color: rgb(146 109 222)">
-                    search
-                </button>
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="http://localhost:8080/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="http://localhost:8080/user?action=show_all_event">Event
+                            list</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">show event</li>
+                    </ol>
+                </nav>
             </div>
         </div>
-    </form>
-</div>
-<div class="container">
-    <div class="table-wrapper">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h2>Event <b>List</b></h2>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="${requestScope['event'].getProfilePic()}" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h2 class="my-3">${requestScope['event'].getEventName()}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0"></p>
+                            </div>
+                            <div style="height: 215px">
+                                <h3 class="text-muted mb-0">${requestScope['event'].getDescription()}</h3>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
                 </div>
             </div>
         </div>
-        <table style="text-align: center" class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th>event name</th>
-                <th>address</th>
-                <th>hold time</th>
-                <th>event id</th>
-                <th>Edit</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="event" items="${requestScope['events']}">
-                <tr>
-                    <td>${event.getEventName()}</td>
-                    <td>${event.getAddress()}</td>
-                    <td>${event.getHoldTime()}</td>
-                    <td><a href="/user?action=show1event&event_id=${event.getEventId()}">${event.getEventId()}</a></td>
-                    <td>
-                        <form>
-                            <button class="btn btn-primary profile-button" ><a href="/user?action=show1event&event_id=${event.getEventId()}">Details</a> </button>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
     </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div>
+        <c:forEach items="${requestScope['event'].getPictures()}" var="e">
+            <img height="300px" width="406px" src="${e}" alt="event img"/>
+        </c:forEach>
+    </div>
+    <c:if test="${requestScope['registerStatus']}">
+        <form method="post">
+            <input type="hidden" name="event_id" value="${requestScope['event'].getEventId()}">;
+            <input type="hidden" name="req" value="false">;
+            <button style="color: red">Unregister event</button>
+        </form>
+    </c:if>
+    <c:otherwise>
+        <form method="post">
+            <input type="hidden" name="event_id" value="${requestScope['event'].getEventId()}">;
+            <input type="hidden" name="req" value="true">;
+            <button style="color: #2fff00">Register this event</button>
+        </form>
+    </c:otherwise>
+</section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
