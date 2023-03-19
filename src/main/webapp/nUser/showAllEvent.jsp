@@ -588,30 +588,20 @@
             border: 1px solid #ddd;
         }
 
+        #time {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-    <a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Brand<b>Name</b></a>
+    <a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Event <b></b></a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Collection of nav links, forms, and other content for toggling -->
     <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-        <form class="navbar-form form-inline">
-            <div class="input-group search-box">
-                <input type="text" id="search" class="form-control" placeholder="Search here...">
-                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-            </div>
-        </form>
         <div class="navbar-nav ml-auto">
-            <a href="#" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Home</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-gears"></i><span>Projects</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-users"></i><span>Team</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-pie-chart"></i><span>Reports</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-briefcase"></i><span>Careers</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-envelope"></i><span>Messages</span></a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-bell"></i><span>Notifications</span></a>
             <div class="nav-item dropdown">
                 <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
                         src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar">
@@ -628,30 +618,26 @@
 </nav>
 <div style="max-width: 1300px; margin: auto">
     <form action="/user?action=show_all_event" method="get">
-        <div class="row">
+        <div id="time">
             <div class="form-outline timepicker-inline-24">
-                <input type="datetime-local" name="timeBegin" class="form-control">
-                <label class="form-label">Select a time</label>
-                <input type="datetime-local" name="timeEnd" class="form-control">
-                <label class="form-label">Select a time</label>
+                <input type="date" name="timeBegin">
+                <label class="form-label">Select a time Begin</label>&nbsp&nbsp&nbsp&nbsp
+                <input type="date" name="timeEnd">
+                <label class="form-label">Select a time End</label>
             </div>
             <div class="form-outline">
                 <textarea class="form-control" id="textAreaExample" name="address" rows="4"></textarea>
                 <label class="form-label" for="textAreaExample">Address</label>
             </div>
             <div class="form-outline">
-                <input type="text" name="minFee" lass="form-control"/>
-                <label class="form-label">Example label</label>
-                <div class="form-helper">Example helper</div>
-            </div>
-            <div class="form-outline">
-                <input type="text" name="maxFee" class="form-control"/>
-                <label class="form-label">Example label</label>
-                <div class="form-helper">Example helper</div>
-            </div>
-            <div class="col-2">
-                <span class="input-group-btn"><button type="submit"
-                                                      class="btn btn-sm btn-success"> search</button> </span>
+                <input type="text" name="minFee"/>
+                <label class="form-label">min Fee</label>&nbsp&nbsp
+                <input type="text" name="maxFee"/>
+                <label class="form-label">max Fee</label>&nbsp&nbsp&nbsp&nbsp
+                <button type="submit"
+                        class="btn btn-sm btn-success" style="font-size: 15px; background-color: rgb(146 109 222)">
+                    search
+                </button>
             </div>
         </div>
     </form>
@@ -665,7 +651,7 @@
                 </div>
             </div>
         </div>
-        <table class="table table-striped table-hover">
+        <table style="text-align: center" class="table table-striped table-hover">
             <thead>
             <tr>
                 <th>event name</th>
@@ -685,18 +671,6 @@
             </c:forEach>
             </tbody>
         </table>
-        <div class="clearfix">
-            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-            <ul class="pagination">
-                <li class="page-item disabled"><a href="#">Previous</a></li>
-                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">Next</a></li>
-            </ul>
-        </div>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
