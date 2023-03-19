@@ -627,7 +627,7 @@
             </div>
             <div class="form-outline">
                 <textarea class="form-control" id="textAreaExample" name="address" rows="4"></textarea>
-                <label class="form-label" for="textAreaExample">Address</label>
+                <label class="form-label">Address</label>
             </div>
             <div class="form-outline">
                 <input type="text" name="minFee"/>
