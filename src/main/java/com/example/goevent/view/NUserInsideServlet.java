@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-@WebServlet(name = "NUserInsideServlet", value = "/nuserinside")
+@WebServlet(name = "NUserInsideServlet", value = "/user")
 public class NUserInsideServlet extends HttpServlet {
     EventController eventController=new EventController();
     NormalUserProcessor userProcessor=new NormalUserProcessor();
