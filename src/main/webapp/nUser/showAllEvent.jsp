@@ -667,7 +667,7 @@
                     <td>${event.getEventName()}</td>
                     <td>${event.getAddress()}</td>
                     <td>${event.getHoldTime()}</td>
-                    <td>${event.getEventId()}</td>
+                    <td><a href="/user?action=show1event&event_id=${event.getEventId()}">${event.getEventId()}</a></td>
                 </tr>
             </c:forEach>
             </tbody>
