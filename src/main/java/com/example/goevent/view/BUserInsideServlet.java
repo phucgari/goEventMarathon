@@ -41,11 +41,27 @@ public class BUserInsideServlet extends HttpServlet {
                 case "list-users-in-event":
                     listUsersInEvent(request, response);
                     break;
+                case "show-1-event":
+                    show1event(request,response);
+                    break;
                 default:
                     listEvents(request, response);
                     break;
             }
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void show1event(HttpServletRequest request, HttpServletResponse response) {
+        int event_id= Integer.parseInt(request.getParameter("event_id"));
+        Event event=eventController.showByIndex(event_id);
+        request.setAttribute("event",event);
+        try {
+            request.getRequestDispatcher("/show1Event.jsp").forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
