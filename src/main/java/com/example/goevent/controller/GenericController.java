@@ -8,7 +8,7 @@ public interface GenericController<E> {
 
     String jdbcURL = "jdbc:mysql://localhost:3306/go_event?useUnicode=yes&characterEncoding=UTF-8";
     String jdbcUsername = "root";
-    String jdbcPassword = "123456";
+    String jdbcPassword = "Nguyenluc97";
 
     Connector connector = new Connector(jdbcURL, jdbcUsername, jdbcPassword);
 
