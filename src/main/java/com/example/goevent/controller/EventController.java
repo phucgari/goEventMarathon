@@ -52,8 +52,8 @@ public class EventController implements GenericController<Event> {
             "select count(*) as number_register,SUM(event_n_user.checkin=true) AS number_participant ,event.* " +
             "from event " +
             "left join event_n_user on event.event_id=event_n_user.event_id " +
-            "group by event.event_id " +
-            "where b_user_id= ?";
+                    "where b_user_id= ? "+
+            "group by event.event_id " ;
     private final String UPDATE_EVENT=
             "update event " +
             "set hold_time=?, " +

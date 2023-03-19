@@ -46,7 +46,7 @@ public class BUserInsideServlet extends HttpServlet {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -85,7 +85,8 @@ public class BUserInsideServlet extends HttpServlet {
 
     private void listEvents(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("n_user_id"));
+        HttpSession session = request.getSession();
+        int id = (int) session.getAttribute("b_user_id");
         List<Event> events = eventController.showAllEventForBUser(id);
         request.setAttribute("events", events);
         RequestDispatcher dispatcher = request.getRequestDispatcher("event/showListEventsByBUser.jsp");

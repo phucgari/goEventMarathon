@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("b_user_id", ((BusinessUser) user).getBusinessUserId());
             //forward vao luc
             try {
-                response.sendRedirect("/BusinessUserServlet");
+                response.sendRedirect("/events");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
