@@ -15,7 +15,7 @@ public class NormalUserController implements GenericController<NormalUser> {
             "n_user.gender, n_user.address, n_user.email, user.login_name, user.password FROM n_user " +
             "left join user on n_user.user_id = user.user_id";
     private static final String GET_NORMAL_USER_BY_ID = "SELECT * FROM n_user " +
-            "inner join user on n_user.user_id = user.user_id WHERE n_user.n_user_id = ?";
+            "left join user on n_user.user_id = user.user_id WHERE n_user.n_user_id = ?";
     private static final String CREATE_NORMAL_USER = "call CREATE_NORMAL_USER(?,?,?,?,?,?,?,?,?);";
     private static final String UPDATE_NORMAL_USER = "call update_normal_user(?,?,?,?,?,?,?,?,?);";
 

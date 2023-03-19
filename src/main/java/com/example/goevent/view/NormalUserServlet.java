@@ -41,8 +41,8 @@ public class NormalUserServlet extends HttpServlet {
     }
 
     private void showEditNormalUser(HttpServletRequest request, HttpServletResponse response) {
-        int normalUserId = Integer.parseInt(request.getParameter("normalUserId"));
-        NormalUser normalUser = normalUserController.showByIndex(normalUserId);
+        int n_user_id = Integer.parseInt(request.getParameter("n_user_id"));
+        NormalUser normalUser = normalUserController.showByIndex(n_user_id);
         request.setAttribute("normalUser", normalUser);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("nUser/edit.jsp");
         try {
@@ -73,17 +73,18 @@ public class NormalUserServlet extends HttpServlet {
     }
 
     private void updateNormalUser(HttpServletRequest request, HttpServletResponse response) {
-        int normalUserId = Integer.parseInt(request.getParameter("normalUserId"));
+        int n_user_id = Integer.parseInt(request.getParameter("n_user_id"));
         String password = request.getParameter("password");
-        String fullName = request.getParameter("fullName");
+        String name = request.getParameter("name");
         String avatar = request.getParameter("avatar");
         String phone = request.getParameter("phone");
         int age = Integer.parseInt(request.getParameter("age"));
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
         String email = request.getParameter("email");
-        NormalUser normalUser = new NormalUser(password, fullName, avatar, phone, normalUserId, age, gender, address, email);
+        NormalUser normalUser = new NormalUser(password, name, avatar, phone, n_user_id, age, gender, address, email);
         normalUserController.update(normalUser);
+        request.setAttribute("normalUser",normalUser);
         try {
             response.sendRedirect("nUser/edit.jsp");
         } catch (IOException e) {

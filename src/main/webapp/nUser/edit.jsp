@@ -1,5 +1,12 @@
-
+<%--
+  Created by IntelliJ IDEA.
+  User: Nam
+  Date: 3/18/2023
+  Time: 5:25 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -7,7 +14,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
-            background: rgb(146 109 222)
+            background: rgb(99, 39, 120)
         }
 
         .form-control:focus {
@@ -16,7 +23,7 @@
         }
 
         .profile-button {
-        rgb(146 109 222);
+            background: rgb(99, 39, 120);
             box-shadow: none;
             border: none
         }
@@ -58,7 +65,7 @@
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
                                                                                          width="150px"
-                                                                                         src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                                                                                         src="${requestScope["avatar"]}"><span
                     class="font-weight-bold">Edogaru</span><span
                     class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
         </div>
@@ -67,72 +74,42 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control"
-                                                                                   placeholder="first name" value="">
-                    </div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control"
-                                                                                      value="" placeholder="surname">
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text"
+                <form action="/nuser?action=edit" method="post">
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Full Name</label><input type="text"
                                                                                              class="form-control"
-                                                                                             placeholder="enter phone number"
-                                                                                             value=""></div>
-                    <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text"
-                                                                                              class="form-control"
-                                                                                              placeholder="enter address line 1"
-                                                                                              value=""></div>
-                    <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text"
-                                                                                              class="form-control"
-                                                                                              placeholder="enter address line 2"
-                                                                                              value=""></div>
-                    <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control"
-                                                                                        placeholder="enter address line 2"
-                                                                                        value=""></div>
-                    <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control"
-                                                                                     placeholder="enter address line 2"
-                                                                                     value=""></div>
-                    <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control"
-                                                                                    placeholder="enter address line 2"
-                                                                                    value=""></div>
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control"
-                                                                                        placeholder="enter email id"
-                                                                                        value=""></div>
-                    <div class="col-md-12"><label class="labels">Education</label><input type="text"
+                                                                                             value="<c:out value='${requestScope.normalUser.name}' />">
+                        </div>
+                        <div class="col-md-12"><label class="labels">Avatar</label><input type="text"
+                                                                                          class="form-control"
+                                                                                          value="<c:out value='${requestScope.normalUser.avatar}' />">
+                        </div>
+                        <div class="col-md-12"><label class="labels">Phone</label><input type="text"
                                                                                          class="form-control"
-                                                                                         placeholder="education"
-                                                                                         value=""></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control"
-                                                                                      placeholder="country" value="">
+                                                                                         value="<c:out value='${requestScope.normalUser.phone}' />">
+                        </div>
+                        <input type="hidden" class="form-control" value="<c:out value='${requestScope.normalUser.n_user_id}' />">
                     </div>
-                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text"
-                                                                                           class="form-control" value=""
-                                                                                           placeholder="state"></div>
-                </div>
-                <div class="mt-5 text-center">
-                    <button class="btn btn-primary profile-button" type="button">Save Profile</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience">
-                    <span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span>
-                </div>
-                <br>
-                <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text"
-                                                                                                   class="form-control"
-                                                                                                   placeholder="experience"
-                                                                                                   value=""></div>
-                <br>
-                <div class="col-md-12"><label class="labels">Additional Details</label><input type="text"
-                                                                                              class="form-control"
-                                                                                              placeholder="additional details"
-                                                                                              value=""></div>
+                    <div class="col-md-12"><label class="labels">Age</label><input type="text" class="form-control"
+                                                                                   value="<c:out value='${requestScope.normalUser.age}' />">
+                    </div>
+                    <div class="col-md-12"><label class="labels">Gender</label><input type="text" class="form-control"
+                                                                                      value="<c:out value='${requestScope.normalUser.gender}' />">
+                    </div>
+                    <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control"
+                                                                                       value="<c:out value='${requestScope.normalUser.address}' />">
+                    </div>
+                    <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control"
+                                                                                     value="<c:out value='${requestScope.normalUser.email}' />">
+                    </div>
+                    <div class="col-md-12"><label class="labels">Password</label><input type="text"
+                                                                                        class="form-control"
+                                                                                        value="<c:out value='${requestScope.normalUser.password}' />">
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="button">Save Profile</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
