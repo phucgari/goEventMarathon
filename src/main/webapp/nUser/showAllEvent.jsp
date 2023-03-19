@@ -593,12 +593,12 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="n" items="${requestScope.events}">
+            <c:forEach var="event" items="${requestScope['events']}">
                 <tr>
-                    <td><c:out value="${n.event_name}"/></td>
-                    <td><c:out value="${n.address}"/></td>
-                    <td><c:out value="${n.hold_time}"/></td>
-                    <td><c:out value="${n.event_id}"/></td>
+                    <td>${event.getEventName()}</td>
+                    <td>${event.getAddress()}</td>
+                    <td>${event.getHoldTime()}</td>
+                    <td>${event.getEventId()}</td>
                 </tr>
             </c:forEach>
             </tbody>
