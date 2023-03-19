@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("n_user_id", ((NormalUser) user).getNormalUserId());
             //forward vao phuc
             try {
-                response.sendRedirect("/NormalUserServlet");
+                response.sendRedirect("/nuserinside?action=show_all_event");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
