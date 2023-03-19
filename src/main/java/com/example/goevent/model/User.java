@@ -41,6 +41,12 @@ public abstract class User {
 
     }
 
+    public User(String fullName, String avatar, String phone) {
+        this.fullName = fullName;
+        this.avatar = avatar;
+        this.phone = phone;
+    }
+
     public int getUserId() {
         return userId;
     }

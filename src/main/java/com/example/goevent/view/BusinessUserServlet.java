@@ -1,20 +1,26 @@
 package com.example.goevent.view;
 
 import com.example.goevent.controller.BusinessUserController;
+import com.example.goevent.controller.EventController;
 import com.example.goevent.model.BusinessUser;
+import com.example.goevent.model.Event;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "BusinessUserServlet", value = "/BusinessUserServlet")
 public class BusinessUserServlet extends HttpServlet {
 
     private BusinessUserController businessUserController;
+    private EventController eventController;
 
     public void init() {
         businessUserController = new BusinessUserController();
+        eventController = new EventController();
     }
 
 
@@ -33,11 +39,13 @@ public class BusinessUserServlet extends HttpServlet {
                 case "update":
                     updateForm(request, response);
                     break;
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     private void createForm(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("login/signupB.jsp");
@@ -49,6 +57,9 @@ public class BusinessUserServlet extends HttpServlet {
     }
 
     private void updateForm(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("b_user_id"));
+        BusinessUser bUser = businessUserController.showByIndex(id);
+        request.setAttribute("bUser", bUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("business/edit.jsp");
         try {
             dispatcher.forward(request, response);
@@ -84,8 +95,7 @@ public class BusinessUserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String avatar = request.getParameter("avatar");
         String phone = request.getParameter("phone");
-        String gender = request.getParameter("gender");
-        BusinessUser businessUser = new BusinessUser(username, password, name, avatar, phone, gender);
+        BusinessUser businessUser = new BusinessUser(username, password, name, avatar, phone);
         businessUserController.create(businessUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("login/signupB.jsp");
         try {
@@ -100,8 +110,7 @@ public class BusinessUserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String avatar = request.getParameter("avatar");
         String phone = request.getParameter("phone");
-        String gender = request.getParameter("gender");
-        BusinessUser businessUser = new BusinessUser(password, name, avatar, phone, gender);
+        BusinessUser businessUser = new BusinessUser(password, name, avatar, phone);
         businessUserController.update(businessUser);
         RequestDispatcher dispatcher =  request.getRequestDispatcher("bUser/edit.jsp");
         try {

@@ -38,7 +38,7 @@ public class NUserInsideServlet extends HttpServlet {
         int nUser_id= (int) session.getAttribute("n_user_id");
         Event event=eventController.showByIndex(event_id);
         boolean registerStatus=userProcessor.checkIfUserAlreadyRegistered(nUser_id,event_id);
-        request.setAttribute("registerStatus",registerStatus);
+        request.setAttribute("registerStatus",registerStatus);//true neu dk,false neu chua dk
         request.setAttribute("event",event);
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("/nUser/show1Event.jsp");
         try {
@@ -49,15 +49,15 @@ public class NUserInsideServlet extends HttpServlet {
     }
 
     private void showAllRegisteredEvents(HttpServletRequest request, HttpServletResponse response) {
-        LocalDateTime timeBegin= request.getParameter("timeBegin")==null?LocalDateTime.MIN:
+        LocalDateTime timeBegin= request.getParameter("timeBegin")==null||request.getParameter("timeBegin").equals("")?LocalDateTime.of(1900,01,01,00,00,00):
                 LocalDateTime.parse(request.getParameter("timeBegin"));
-        LocalDateTime timeEnd =request.getParameter("timeEnd")==null?LocalDateTime.MAX:
+        LocalDateTime timeEnd =request.getParameter("timeEnd")==null||request.getParameter("timeEnd").equals("")?LocalDateTime.of(2100,01,01,00,00,00):
                 LocalDateTime.parse(request.getParameter("timeEnd"));
         String address=request.getParameter("address")==null?"":
                 request.getParameter("address");
-        long minFee=request.getParameter("minFee")==null?0:
+        long minFee=request.getParameter("minFee")==null||request.getParameter("minFee").equals("")?0:
                 Long.parseLong(request.getParameter("minFee"));
-        long maxFee=request.getParameter("maxFee")==null?Long.MAX_VALUE:
+        long maxFee=request.getParameter("maxFee")==null||request.getParameter("maxFee").equals("")?Long.MAX_VALUE:
                 Long.parseLong(request.getParameter("maxFee"));
         HttpSession session=request.getSession();
         int n_user_id= (int) session.getAttribute("n_user_id");
@@ -72,15 +72,15 @@ public class NUserInsideServlet extends HttpServlet {
     }
 
     private void showAllEvent(HttpServletRequest request, HttpServletResponse response) {
-        LocalDateTime timeBegin= request.getParameter("timeBegin")==null?LocalDateTime.of(1900,01,01,00,00,00):
+        LocalDateTime timeBegin= request.getParameter("timeBegin")==null||request.getParameter("timeBegin").equals("")?LocalDateTime.of(1900,01,01,00,00,00):
                 LocalDateTime.parse(request.getParameter("timeBegin"));
-        LocalDateTime timeEnd =request.getParameter("timeEnd")==null?LocalDateTime.of(2100,01,01,00,00,00):
+        LocalDateTime timeEnd =request.getParameter("timeEnd")==null||request.getParameter("timeEnd").equals("")?LocalDateTime.of(2100,01,01,00,00,00):
                 LocalDateTime.parse(request.getParameter("timeEnd"));
         String address=request.getParameter("address")==null?"":
                 request.getParameter("address");
-        long minFee=request.getParameter("minFee")==null?0:
+        long minFee=request.getParameter("minFee")==null||request.getParameter("minFee").equals("")?0:
                 Long.parseLong(request.getParameter("minFee"));
-        long maxFee=request.getParameter("maxFee")==null?Long.MAX_VALUE:
+        long maxFee=request.getParameter("maxFee")==null||request.getParameter("maxFee").equals("")?Long.MAX_VALUE:
                 Long.parseLong(request.getParameter("maxFee"));
         ArrayList<Event> events=eventController.showAllEventWithFilterNUser(timeBegin,timeEnd,address,minFee,maxFee);
         request.setAttribute("events",events);
