@@ -735,6 +735,20 @@
             <img height="300px" width="406px" src="${e}" alt="event img"/>
         </c:forEach>
     </div>
+    <c:if test="${requestScope['registerStatus']}">
+        <form method="post">
+            <input type="hidden" name="event_id" value="${requestScope['event'].getEventId()}">;
+            <input type="hidden" name="req" value="false">;
+            <button style="color: red">Unregister event</button>
+        </form>
+    </c:if>
+    <c:otherwise>
+        <form method="post">
+            <input type="hidden" name="event_id" value="${requestScope['event'].getEventId()}">;
+            <input type="hidden" name="req" value="true">;
+            <button style="color: #2fff00">Register this event</button>
+        </form>
+    </c:otherwise>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
