@@ -534,7 +534,7 @@
                         src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar">
                     Antonio Moreno <b class="caret"></b></a>
                 <div class="dropdown-menu">
-                    <a href="event/edit.jsp" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+                    <a href="nUser/edit.jsp" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
                     <div class="divider dropdown-divider"></div>
                     <a href="http://localhost:8080/" class="dropdown-item"><i class="material-icons">&#xE8AC;</i>
                         Logout</a>

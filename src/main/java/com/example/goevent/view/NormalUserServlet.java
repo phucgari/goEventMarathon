@@ -44,7 +44,7 @@ public class NormalUserServlet extends HttpServlet {
         int normalUserId = Integer.parseInt(request.getParameter("normalUserId"));
         NormalUser normalUser = normalUserController.showByIndex(normalUserId);
         request.setAttribute("normalUser", normalUser);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(".jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("nUser/edit.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -85,7 +85,7 @@ public class NormalUserServlet extends HttpServlet {
         NormalUser normalUser = new NormalUser(password, fullName, avatar, phone, normalUserId, age, gender, address, email);
         normalUserController.update(normalUser);
         try {
-            response.sendRedirect("event/edit.jsp");
+            response.sendRedirect("nUser/edit.jsp");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
