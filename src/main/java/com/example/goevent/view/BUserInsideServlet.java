@@ -30,7 +30,7 @@ public class BUserInsideServlet extends HttpServlet {
         if (action == null) {
             action = "";
         }
-        try {
+
             switch (action) {
                 case "create":
                     createForm(request, response);
@@ -45,9 +45,7 @@ public class BUserInsideServlet extends HttpServlet {
                     listEvents(request, response);
                     break;
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     private void listUsersInEvent(HttpServletRequest request, HttpServletResponse response) {
@@ -150,9 +148,15 @@ public class BUserInsideServlet extends HttpServlet {
     }
 
     private void updateEvent(HttpServletRequest request, HttpServletResponse response) {
-        LocalDateTime hold_time = LocalDateTime.parse(request.getParameter("hold_time"));
+        LocalDateTime hold_time = null;
+        if (request.getParameter("hold_time") != null) {
+            hold_time=LocalDateTime.parse(request.getParameter("hold_time"));
+        }
         String event_name = request.getParameter("event_name");
-        Long fee = Long.valueOf(request.getParameter("fee"));
+        Long fee = 0L;
+        if (request.getParameter("fee") != null) {
+            fee = Long.parseLong(request.getParameter("fee"));
+        }
         String prof_pic = request.getParameter("prof_picture");
         String desc = request.getParameter("description");
         String address = request.getParameter("address");

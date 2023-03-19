@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -61,13 +62,6 @@
 <body>
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px"
-                     src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
-                    class="font-weight-bold">Edogaru</span><span
-                    class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
-        </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -76,19 +70,23 @@
 
                 <div class="row mt-3">
 
-                    <form method="post" action="">
+                    <form method="post">
+
+                        <c:if test="${event != null}">
+                            <input type="hidden" name="event_id" value=""/>
+                        </c:if>
                         <div class="col-md-12">
                             <label class="labels">Hold Time</label>
-                            <input type="datetime-local" class="form-control" name="password" placeholder="Enter Hold Time"
+                            <input type="datetime-local" class="form-control" name="hold_time" placeholder="Enter Hold Time"
                                    value="">
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Event Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter Event Name" value="">
+                            <input type="text" class="form-control" name="event_name" placeholder="Enter Event Name" value="">
                         </div>
                         <div class="col-md-12">
                             <label class="labels">Fee</label>
-                            <input type="number" class="form-control" name="avatar" placeholder="Enter Fee"
+                            <input type="number" class="form-control" name="fee" placeholder="Enter Fee"
                                    value="">
                         </div>
                         <div class="col-md-12">
@@ -110,12 +108,16 @@
 
                         <div class="col-md-12">
                             <label class="labels">Tags</label>
-                            <select name="tags">
-                                <c:forEach var="option" items="${tags}">
-                                    <option value="${option.tag_id}">${option.tag_name}</option>
-                                </c:forEach>
-                            </select>
+                            <textarea type="text" class="form-control" name="tag_name"
+                                      placeholder="Tag, down the line to add more tags"></textarea>
                         </div>
+
+                        <div class="col-md-12">
+                            <label class="labels">Photos</label>
+                            <textarea type="text" class="form-control" name="src"
+                                      placeholder="IMG Link, down the line to add more photos."></textarea>
+                        </div>
+
 
                         <div class="col-md-12">
                             <label class="labels"></label>
