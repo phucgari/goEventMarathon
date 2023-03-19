@@ -43,7 +43,6 @@ public class BUserInsideServlet extends HttpServlet {
                 default:
                     listEvents(request, response);
                     break;
-
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -134,6 +133,8 @@ public class BUserInsideServlet extends HttpServlet {
         for (String tag : tagsArr) {
             tags.add(tag);
         }
+        request.setAttribute("tags", tags);
+
 
         String[] picArr = request.getParameterValues("src");
         ArrayList<String> pics = new ArrayList<>();
@@ -159,6 +160,7 @@ public class BUserInsideServlet extends HttpServlet {
 
         int event_id = Integer.parseInt(request.getParameter("event_id"));
 
+
         HttpSession session = request.getSession();
         int b_user_id = (int) session.getAttribute("b_user_id");
 
@@ -175,7 +177,7 @@ public class BUserInsideServlet extends HttpServlet {
         }
         Event event = new Event(hold_time, event_name, fee, prof_pic, pics, tags, desc, address, b_user_id);
         eventController.update(event);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("event/edit.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("test/edit.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {

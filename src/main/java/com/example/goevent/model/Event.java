@@ -62,6 +62,8 @@ public class Event {
         this.numberParticipant=numberParticipant;
     }
 
+
+
     public long getFee() {
         return fee;
     }
