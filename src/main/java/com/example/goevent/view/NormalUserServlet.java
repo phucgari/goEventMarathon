@@ -25,22 +25,17 @@ public class NormalUserServlet extends HttpServlet {
             case "edit":
                 showEditNormalUser(request, response);
                 break;
-            case "login":
-                showFormLoginNormal(request, response);
-                break;
             default:
                 showALlNormalUser(request, response);
         }
     }
 
-    private void showFormLoginNormal(HttpServletRequest request, HttpServletResponse response) {
-    }
 
     private void showALlNormalUser(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<NormalUser> normalUsers = normalUserController.showAll();
             request.setAttribute("normal", normalUsers);
-            request.getRequestDispatcher("nUser/normal.jsp").forward(request, response);
+            request.getRequestDispatcher("event/event.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -91,7 +86,7 @@ public class NormalUserServlet extends HttpServlet {
         NormalUser normalUser = new NormalUser(password, fullName, avatar, phone, normalUserId, age, gender, address, email);
         normalUserController.update(normalUser);
         try {
-            response.sendRedirect("");
+            response.sendRedirect("event/edit.jsp");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
