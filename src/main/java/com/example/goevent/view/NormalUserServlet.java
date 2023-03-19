@@ -9,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "NormalUserServlet", value = "/NormalUserServlet")
+@WebServlet(name = "NormalUserServlet", value = "/nuser")
 public class NormalUserServlet extends HttpServlet {
     NormalUserController normalUserController = new NormalUserController();
 
