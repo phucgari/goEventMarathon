@@ -40,7 +40,7 @@ public class NormalUserServlet extends HttpServlet {
     }
 
     private void showEditNormalUser(HttpServletRequest request, HttpServletResponse response) {
-        int n_user_id = Integer.parseInt(request.getParameter("n_user_id"));
+        int n_user_id = (int) request.getSession().getAttribute("n_user_id");
         NormalUser normalUser = normalUserController.showByIndex(n_user_id);
         request.setAttribute("normalUser", normalUser);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("nUser/edit.jsp");
@@ -72,7 +72,7 @@ public class NormalUserServlet extends HttpServlet {
     }
 
     private void updateNormalUser(HttpServletRequest request, HttpServletResponse response) {
-        int n_user_id = Integer.parseInt(request.getParameter("n_user_id"));
+        int n_user_id = (int) request.getSession().getAttribute("n_user_id");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         String avatar = request.getParameter("avatar");
@@ -83,9 +83,9 @@ public class NormalUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         NormalUser normalUser = new NormalUser(password, name, avatar, phone, n_user_id, age, gender, address, email);
         normalUserController.update(normalUser);
-        request.setAttribute("normalUser",normalUser);
+        request.setAttribute("normalUser", normalUser);
         try {
-            response.sendRedirect("nUser/edit.jsp");
+            response.sendRedirect("user?action=show_all_event");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

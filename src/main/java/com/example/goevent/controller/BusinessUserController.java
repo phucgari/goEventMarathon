@@ -59,7 +59,7 @@ public class BusinessUserController implements GenericController<BusinessUser> {
                 String name = rs.getString("name");
                 String avatar = rs.getString("avatar");
                 String phone = rs.getString("phone");
-                user = new BusinessUser(b_user_id, user_id, name, avatar, phone);
+//                user = new BusinessUser(b_user_id, user_id, name, avatar, phone);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

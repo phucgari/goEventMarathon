@@ -607,7 +607,7 @@
                         src="${requestScope["user"].getAvatar()}" class="avatar" alt="Avatar">
                     ${requestScope["user"].getFullName()} <b class="caret"></b></a>
                 <div class="dropdown-menu">
-                    <a href="nUser/action=edit" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+                    <a href="nUser?action=edit" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
                     <div class="divider dropdown-divider"></div>
                     <a href="http://localhost:8080/" class="dropdown-item"><i class="material-icons">&#xE8AC;</i>
                         Logout</a>
