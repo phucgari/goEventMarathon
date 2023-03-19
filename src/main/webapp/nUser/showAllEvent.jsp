@@ -545,14 +545,16 @@
 </nav>
 </body>
 </html>
-<form action="/nuserinside?action=show_all_event" method="get">
+<form action="/user?action=show_all_event" method="get">
     <div class="row">
         <div class="col-5">
-            <input type="datetime-local" name="timeBegin" id="timeBegin"  min="1900-06-07T00:00" max="2100-06-14T00:00" size="35"
+            <input type="datetime-local" name="timeBegin" id="timeBegin" min="1900-06-07T00:00" max="2100-06-14T00:00"
+                   size="35"
                    value='2018-06-07T00:00'>
         </div>
         <div class="col-5">
-            <input type="datetime-local" name="timeEnd" id="timeEnd"  min="1900-06-07T00:00" max="2100-06-14T00:00" size="35"
+            <input type="datetime-local" name="timeEnd" id="timeEnd" min="1900-06-07T00:00" max="2100-06-14T00:00"
+                   size="35"
                    value='2024-06-14T00:00'>
         </div>
         <div class="col-5">
@@ -577,7 +579,7 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h2>Normal <b>Management</b></h2>
+                    <h2>Event <b>List</b></h2>
                 </div>
             </div>
         </div>
