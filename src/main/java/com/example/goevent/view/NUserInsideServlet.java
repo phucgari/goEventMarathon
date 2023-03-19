@@ -17,7 +17,7 @@ public class NUserInsideServlet extends HttpServlet {
     EventController eventController=new EventController();
     NormalUserProcessor userProcessor=new NormalUserProcessor();
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TaskBarController.setUpTaskBar(request,response);
         String action=request.getParameter("action");
         if(action==null)action="";
